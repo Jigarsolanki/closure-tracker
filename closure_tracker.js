@@ -24,4 +24,25 @@
     }
     return oFireListener.apply(this, arguments);
   };
+
+
+  function togglePanel() {
+
+    var expandedPanel, mainPanel, expanderButton, expandableMaxHeight,
+      expandableHeightPlusBorder;
+
+    expandableMaxHeight = 500;
+    expandableHeightPlusBorder = expandableMaxHeight + 2;
+
+    mainPanel = goog.dom.getElement('closure-tracker-main-panel');
+    expanderButton = mainPanel.children[0];
+    expandedPanel = mainPanel.children[1];
+
+    if (goog.style.getSize(expandedPanel).height == expandableHeightPlusBorder) {
+      goog.style.setHeight(expandedPanel, 0);
+      return;
+    }
+    goog.style.setHeight(expandedPanel, expandableMaxHeight);
+  };
+  goog.events.listen(goog.dom.getElement('closure-tracker-main-panel'), goog.events.EventType.CLICK, togglePanel);
 }());
