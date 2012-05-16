@@ -1,0 +1,10 @@
+{
+	"name": "closure event override",
+	"version": "0.0.0.1",
+	"content_scripts": [
+		{
+		"matches": ["http://127.0.0.1/*", "https://127.0.0.1/*"],
+		"js": ["script.js"]
+		}
+	]
+}
