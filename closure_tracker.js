@@ -1,17 +1,24 @@
+goog.require('ctracker.templates');
+
 (function() {
 
   var oListen, oUnlistenByKey, oFireListener;
 
+  /**
+   * OVERRIDE GOOGLE LIBRARIES TO TRACK THINGS
+   */
   oListen = goog.events.listen;
   goog.events.listen = function() {
     oListen.apply(this, arguments);
-    console.log('Event Listeners Increased To:' + goog.events.getTotalListenerCount());
+    console.log('Event Listeners Increased To:' +
+      goog.events.getTotalListenerCount());
   };
 
   oUnlistenByKey = goog.events.unlistenByKey;
   goog.events.unlistenByKey = function() {
     oUnlistenByKey.apply(this, arguments);
-    console.log('Event Listeners Descreased To:' + goog.events.getTotalListenerCount());
+    console.log('Event Listeners Descreased To:' +
+      goog.events.getTotalListenerCount());
   };
 
   oFireListener = goog.events.fireListener;
@@ -26,6 +33,9 @@
   };
 
 
+  /**
+   * PANEL SETUP GOES HERE
+   */
   function togglePanel() {
 
     var expandedPanel, mainPanel, expanderButton, expandableMaxHeight,
@@ -38,11 +48,32 @@
     expanderButton = mainPanel.children[0];
     expandedPanel = mainPanel.children[1];
 
-    if (goog.style.getSize(expandedPanel).height == expandableHeightPlusBorder) {
+    if (goog.style.getSize(expandedPanel).
+      height == expandableHeightPlusBorder) {
+
       goog.style.setHeight(expandedPanel, 0);
       return;
     }
     goog.style.setHeight(expandedPanel, expandableMaxHeight);
   };
-  goog.events.listen(goog.dom.getElement('closure-tracker-main-panel'), goog.events.EventType.CLICK, togglePanel);
+
+  function setup() {
+
+    var node;
+
+    node = goog.dom.createElement('div');
+    node.innerHTML = ctracker.templates.event_panel();
+    goog.dom.appendChild(goog.dom.getElement('closure-tracker-main-panel'),
+      node);
+
+    goog.events.listen(goog.dom.getElement('closure-tracker-main-panel'),
+      goog.events.EventType.CLICK,
+      togglePanel);
+  };
+
+  /**
+   * START OUR APP HERE.
+   */
+  setup();
+
 }());
