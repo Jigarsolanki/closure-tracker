@@ -38,23 +38,11 @@ goog.require('ctracker.templates');
    */
   function togglePanel() {
 
-    var expandedPanel, mainPanel, expanderButton, expandableMaxHeight,
-      expandableHeightPlusBorder;
+    var expandedPanel;
 
-    expandableMaxHeight = 500;
-    expandableHeightPlusBorder = expandableMaxHeight + 2;
-
-    mainPanel = goog.dom.getElement('closure-tracker-main-panel');
-    expanderButton = mainPanel.children[0];
-    expandedPanel = mainPanel.children[1];
-
-    if (goog.style.getSize(expandedPanel).
-      height == expandableHeightPlusBorder) {
-
-      goog.style.setHeight(expandedPanel, 0);
-      return;
-    }
-    goog.style.setHeight(expandedPanel, expandableMaxHeight);
+    expandedPanel = goog.dom.getElement('closure-tracker-expanded-panel');
+    goog.style.showElement(expandedPanel,
+      !goog.style.isElementShown(expandedPanel));
   };
 
   function setup() {
@@ -63,7 +51,7 @@ goog.require('ctracker.templates');
 
     node = goog.dom.createElement('div');
     node.innerHTML = ctracker.templates.event_panel();
-    goog.dom.appendChild(goog.dom.getElement('closure-tracker-main-panel'),
+    goog.dom.appendChild(goog.dom.getElement('closure-tracker-expanded-panel'),
       node);
 
     goog.events.listen(goog.dom.getElement('closure-tracker-main-panel'),
