@@ -2,7 +2,9 @@ goog.require('ctracker.templates');
 
 (function() {
 
-  var oListen, oUnlistenByKey, oFireListener;
+  var oListen, oUnlistenByKey, oFireListener, eventAggregator;
+
+  eventAggregator = {};
 
   /**
    * OVERRIDE GOOGLE LIBRARIES TO TRACK THINGS
@@ -23,12 +25,30 @@ goog.require('ctracker.templates');
 
   oFireListener = goog.events.fireListener;
   goog.events.fireListener = function() {
-    var listener, eventObject;
+
+    var listener, eventObject, eventType;
+
     listener = arguments[0];
     eventObject = arguments[1];
+    eventType = eventObject.type;
+
     if (!eventObject.getBrowserEvent) {
-      console.log(listener, eventObject);
+      //console.log(listener, eventObject);
+
+      if (!eventAggregator[eventType]) {
+        eventAggregator[eventType] = {
+          count: 0,
+          target: eventObject.target.toString(),
+          name: eventType.toString()
+        };
+      }
+      eventAggregator[eventType].count += 1;
     }
+    goog.dom.setTextContent(goog.dom.getElement('ctracker-aggregated-events'),
+      ctracker.templates.event_panel({
+        events: goog.object.getValues(eventAggregator)
+      })
+    );
     return oFireListener.apply(this, arguments);
   };
 
@@ -47,10 +67,11 @@ goog.require('ctracker.templates');
 
   function setup() {
 
-    var node;
+    var eventPanel;
 
-    node = goog.dom.createElement('div');
-    node.innerHTML = ctracker.templates.event_panel();
+    eventPanel = goog.dom.createElement('div');
+    eventPanel.id = 'ctracker-aggregated-events';
+    eventPanel.innerHTML = ctracker.templates.event_panel({});
     goog.dom.appendChild(goog.dom.getElement('closure-tracker-expanded-panel'),
       node);
 

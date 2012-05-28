@@ -2,9 +2,16 @@
 
 /**
  * The event panel
+ * @param events
  */
 {template .event_panel}
 <div>
-Harro there.
+    {for $e in $events}
+    <div>
+        <h3>{$e.name}</h3>
+        <p>Count: {$e.count}</p>
+        <p>Targets: {$e.target}</p>
+    </div>
+    {/for}
 </div>
 {/template}
