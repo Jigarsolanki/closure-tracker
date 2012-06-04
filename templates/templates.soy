@@ -2,16 +2,32 @@
 
 /**
  * The event panel
- * @param events
  */
 {template .event_panel}
 <div>
-    {for $e in $events}
-    <div>
-        <h3>{$e.name}</h3>
-        <p>Count: {$e.count}</p>
-        <p>Targets: {$e.target}</p>
-    </div>
-    {/for}
+  <div class="ctracker-event-aggregated">
+  </div>
+  <div class="ctracker-event-activity">
+  </div>
 </div>
+{/template}
+
+/**
+ * An aggregated view of events
+ * @param aggregatedEvents
+ */
+{template .aggregated_events}
+{foreach $e in $aggregatedEvents}
+<div>
+  <h3>{$e.name} ({$e.count})</h3>
+</div>
+{/foreach}
+{/template}
+
+/**
+ * Output from a single event to display
+ * @param singleEvent
+ */
+{template .event_output}
+{$singleEvent.type} -- {$singleEvent.name} acting on {$singleEvent.target}
 {/template}

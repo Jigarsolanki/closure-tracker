@@ -1,4 +1,5 @@
-var script, style, templates, mainPanelElement, expandedPanelElement, titleElement;
+var script, style, templates, mainPanelElement, expandedPanelElement,
+  titleElement;
 
 style = document.createElement('link');
 style.setAttribute('href', '/site_media/css/closure_tracker.css');
