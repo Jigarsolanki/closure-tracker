@@ -82,9 +82,28 @@
       !goog.style.isElementShown(expandedPanel));
   };
 
-  function setup() {
+  function clearPanels() {
 
     var eventPanel;
+
+    eventPanel = goog.dom.getElement('ctracker-event-panel');
+    eventPanel.innerHTML = ctracker.templates.event_panel({});
+    eventAggregator = {};
+  }
+
+  function setup() {
+
+    var eventPanel, optionsPanel;
+
+    optionsPanel = goog.dom.createElement('div');
+    optionsPanel.id = 'ctracker-options-panel';
+    optionsPanel.innerHTML = ctracker.templates.options_panel({});
+    goog.dom.appendChild(goog.dom.getElement('closure-tracker-expanded-panel'),
+      optionsPanel);
+
+    goog.events.listen(goog.dom.getElement('ctracker-options-panel'),
+      goog.events.EventType.CLICK,
+      clearPanels);
 
     eventPanel = goog.dom.createElement('div');
     eventPanel.id = 'ctracker-event-panel';
@@ -92,7 +111,7 @@
     goog.dom.appendChild(goog.dom.getElement('closure-tracker-expanded-panel'),
       eventPanel);
 
-    goog.events.listen(goog.dom.getElement('closure-tracker-main-panel'),
+    goog.events.listen(goog.dom.getElement('closure-tracker-main-panel').children[0],
       goog.events.EventType.CLICK,
       togglePanel);
   };

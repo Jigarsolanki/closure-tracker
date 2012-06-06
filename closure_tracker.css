@@ -29,6 +29,16 @@
   width: 800px;
 }
 
+#ctracker-options-panel {
+  text-align: left;
+  padding: 5px 15px;
+}
+
+#ctracker-options-panel span {
+  cursor: pointer;
+  color: red;
+}
+
 .ctracker-event-aggregated, .ctracker-event-activity {
   overflow-y: scroll;
   text-align: left;
