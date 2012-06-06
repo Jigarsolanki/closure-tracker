@@ -7,13 +7,15 @@ style.setAttribute('rel', 'stylesheet');
 style.setAttribute('type', 'text/css');
 document.body.appendChild(style);
 
-templates = document.createElement('script');
-templates.src = '/site_media/js/ck/templates/ctracker_templates.js';
-document.body.appendChild(templates);
-
 script = document.createElement('script');
 script.src = '/site_media/js/closure_tracker.js';
 document.body.appendChild(script);
+
+templates = document.createElement('script');
+templates.src = '/site_media/js/ck/templates/ctracker_templates.js';
+templates.type = 'text/javascript';
+templates.setAttribute('onload', 'ctrackerTemplatesLoaded = true;');
+document.body.appendChild(templates);
 
 mainPanelElement = document.createElement('div');
 mainPanelElement.id = 'closure-tracker-main-panel';

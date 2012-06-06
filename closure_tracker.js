@@ -1,8 +1,7 @@
-goog.require('ctracker.templates');
-
 (function() {
 
-  var oListen, oUnlistenByKey, oFireListener, eventAggregator;
+  var oListen, oUnlistenByKey, oFireListener, eventAggregator,
+    dependenciesLoaded;
 
   eventAggregator = {};
 
@@ -11,14 +10,14 @@ goog.require('ctracker.templates');
    */
   oListen = goog.events.listen;
   goog.events.listen = function() {
-    oListen.apply(this, arguments);
+    return oListen.apply(this, arguments);
     //console.log('Event Listeners Increased To:' +
     //  goog.events.getTotalListenerCount());
   };
 
   oUnlistenByKey = goog.events.unlistenByKey;
   goog.events.unlistenByKey = function() {
-    oUnlistenByKey.apply(this, arguments);
+    return oUnlistenByKey.apply(this, arguments);
     //console.log('Event Listeners Descreased To:' +
     //  goog.events.getTotalListenerCount());
   };
@@ -43,29 +42,30 @@ goog.require('ctracker.templates');
       eventAggregator[eventType].count += 1;
     }
 
-    aggregatedEventNode = goog.dom.getElementByClass(
-      'ctracker-event-aggregated');
-    aggregatedEventNode.innerHTML = ctracker.templates.aggregated_events({
-      aggregatedEvents: goog.object.getValues(eventAggregator)
-    });
+    if (dependenciesLoaded) {
+      aggregatedEventNode = goog.dom.getElementByClass(
+        'ctracker-event-aggregated');
+      aggregatedEventNode.innerHTML = ctracker.templates.aggregated_events({
+        aggregatedEvents: goog.object.getValues(eventAggregator)
+      });
 
-    eventNode = goog.dom.createElement('div');
-    goog.dom.setTextContent(
-      eventNode,
-      ctracker.templates.event_output({
-        singleEvent: {
-          type: eventType,
-          target: eventObject.target.toString(),
-          name: eventType.toString()
-        }
-      })
-    );
-    goog.dom.insertChildAt(
-      goog.dom.getElementByClass('ctracker-event-activity'),
-      eventNode,
-      0
-    );
-
+      eventNode = goog.dom.createElement('div');
+      goog.dom.setTextContent(
+        eventNode,
+        ctracker.templates.event_output({
+          singleEvent: {
+            type: eventType,
+            target: eventObject.target.toString(),
+            name: eventType.toString()
+          }
+        })
+      );
+      goog.dom.insertChildAt(
+        goog.dom.getElementByClass('ctracker-event-activity'),
+        eventNode,
+        0
+      );
+    }
     return oFireListener.apply(this, arguments);
   };
 
@@ -100,6 +100,12 @@ goog.require('ctracker.templates');
   /**
    * START OUR APP HERE.
    */
-  setup();
-
+  while (!dependenciesLoaded) {
+    if (ctrackerTemplatesLoaded) {
+      dependenciesLoaded = true;
+      goog.require('ctracker.templates');
+      setup();
+    }
+  }
 }());
+

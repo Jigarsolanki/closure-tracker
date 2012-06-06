@@ -17,11 +17,18 @@
  * @param aggregatedEvents
  */
 {template .aggregated_events}
-{foreach $e in $aggregatedEvents}
 <div>
-  <h3>{$e.name} ({$e.count})</h3>
+  <table>
+    <tr>
+      <th>Name</th><th>Count</th>
+    </tr>
+    {foreach $e in $aggregatedEvents}
+    <tr>
+      <td>{$e.name}</td><td>{$e.count}</td>
+    </tr>
+    {/foreach}
+  </table>
 </div>
-{/foreach}
 {/template}
 
 /**

@@ -16,12 +16,14 @@ ctracker.templates.event_panel = function(opt_data, opt_sb) {
 
 ctracker.templates.aggregated_events = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  var eList5 = opt_data.aggregatedEvents;
-  var eListLen5 = eList5.length;
-  for (var eIndex5 = 0; eIndex5 < eListLen5; eIndex5++) {
-    var eData5 = eList5[eIndex5];
-    output.append('<div><h3>', soy.$$escapeHtml(eData5.name), ' (', soy.$$escapeHtml(eData5.count), ')</h3></div>');
+  output.append('<div><table><tr><th>Name</th><th>Count</th></tr>');
+  var eList6 = opt_data.aggregatedEvents;
+  var eListLen6 = eList6.length;
+  for (var eIndex6 = 0; eIndex6 < eListLen6; eIndex6++) {
+    var eData6 = eList6[eIndex6];
+    output.append('<tr><td>', soy.$$escapeHtml(eData6.name), '</td><td>', soy.$$escapeHtml(eData6.count), '</td></tr>');
   }
+  output.append('</table></div>');
   return opt_sb ? '' : output.toString();
 };
 

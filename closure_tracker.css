@@ -1,5 +1,5 @@
 #closure-tracker-main-panel {
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   text-align: center;
   color: black;
@@ -26,15 +26,23 @@
 }
 
 #ctracker-event-panel {
-  width: 500px;
+  width: 800px;
 }
 
-.ctracker-event-aggregated {
+.ctracker-event-aggregated, .ctracker-event-activity {
   overflow-y: scroll;
-  height: 100px;
-  border-bottom: 1px solid black;
+  text-align: left;
+  height: 280px;
+  width: 360px;
+  display: inline-block;
+  padding: 10px;
 }
-.ctracker-event-activity {
-  overflow-y: scroll;
-  height: 200px;
+
+.ctracker-event-aggregated table {
+  width: 280px;
+}
+.ctracker-event-aggregated table th {
+  border-bottom: 1px solid black;
+  font-size: 14px;
+  color: gray;
 }
