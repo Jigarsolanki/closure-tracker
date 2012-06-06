@@ -31,11 +31,17 @@
 
 #ctracker-options-panel {
   text-align: left;
-  padding: 5px 15px;
+  margin: 5px 15px;
 }
 
 #ctracker-options-panel span {
   cursor: pointer;
+  margin-left: 15px;
+  color: green;
+}
+
+#ctracker-options-panel .ctracker-listener-count {
+  cursor: default;
   color: red;
 }
 

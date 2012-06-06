@@ -10,28 +10,50 @@
    */
   oListen = goog.events.listen;
   goog.events.listen = function() {
+
+    if (dependenciesLoaded) {
+
+      var listenerCountElement;
+
+      listenerCountElement = goog.dom.getElementByClass(
+        'ctracker-listener-count');
+      goog.dom.setTextContent(listenerCountElement,
+        goog.events.getTotalListenerCount());
+    }
     return oListen.apply(this, arguments);
-    //console.log('Event Listeners Increased To:' +
-    //  goog.events.getTotalListenerCount());
   };
 
   oUnlistenByKey = goog.events.unlistenByKey;
   goog.events.unlistenByKey = function() {
+
+    if (dependenciesLoaded) {
+
+      var listenerCountElement;
+
+      listenerCountElement = goog.dom.getElementByClass(
+        'ctracker-listener-count');
+      goog.dom.setTextContent(listenerCountElement,
+        goog.events.getTotalListenerCount());
+    }
     return oUnlistenByKey.apply(this, arguments);
-    //console.log('Event Listeners Descreased To:' +
-    //  goog.events.getTotalListenerCount());
   };
 
   oFireListener = goog.events.fireListener;
   goog.events.fireListener = function() {
 
-    var listener, eventObject, eventType, eventNode, aggregatedEventNode;
+    var listener, eventObject, eventType, currentEvent;
 
     listener = arguments[0];
     eventObject = arguments[1];
     eventType = eventObject.type;
 
     if (!eventObject.getBrowserEvent) {
+
+      currentEvent = {
+        type: eventType,
+        target: eventObject.target.toString(),
+        name: eventType.toString()
+      };
 
       if (!eventAggregator[eventType]) {
         eventAggregator[eventType] = {
@@ -40,35 +62,46 @@
         };
       }
       eventAggregator[eventType].count += 1;
-    }
 
-    if (dependenciesLoaded) {
-      aggregatedEventNode = goog.dom.getElementByClass(
-        'ctracker-event-aggregated');
-      aggregatedEventNode.innerHTML = ctracker.templates.aggregated_events({
-        aggregatedEvents: goog.object.getValues(eventAggregator)
-      });
-
-      eventNode = goog.dom.createElement('div');
-      goog.dom.setTextContent(
-        eventNode,
-        ctracker.templates.event_output({
-          singleEvent: {
-            type: eventType,
-            target: eventObject.target.toString(),
-            name: eventType.toString()
-          }
-        })
-      );
-      goog.dom.insertChildAt(
-        goog.dom.getElementByClass('ctracker-event-activity'),
-        eventNode,
-        0
-      );
+      if (dependenciesLoaded) {
+        renderAggregatedEvents();
+        renderSingleEvent(currentEvent);
+      }
     }
     return oFireListener.apply(this, arguments);
   };
 
+  /**
+   * RENDERING FUNCTIONALITY FOR EVENTS
+   */
+  function renderSingleEvent(currentEvent) {
+
+    var singleEventElement;
+
+    singleEventElement = goog.dom.createElement('div');
+    goog.dom.setTextContent(
+      singleEventElement,
+      ctracker.templates.event_output({
+        singleEvent: currentEvent
+      })
+    );
+    goog.dom.insertChildAt(
+      goog.dom.getElementByClass('ctracker-event-activity'),
+      singleEventElement,
+      0
+    );
+  };
+
+  function renderAggregatedEvents() {
+
+    var aggregatedEventElement;
+
+    aggregatedEventElement = goog.dom.getElementByClass(
+      'ctracker-event-aggregated');
+    aggregatedEventElement.innerHTML = ctracker.templates.aggregated_events({
+      aggregatedEvents: goog.object.getValues(eventAggregator)
+    });
+  };
 
   /**
    * PANEL SETUP GOES HERE
@@ -101,7 +134,7 @@
     goog.dom.appendChild(goog.dom.getElement('closure-tracker-expanded-panel'),
       optionsPanel);
 
-    goog.events.listen(goog.dom.getElement('ctracker-options-panel'),
+    goog.events.listen(goog.dom.getElementByClass('ctracker-clear-all'),
       goog.events.EventType.CLICK,
       clearPanels);
 
@@ -111,9 +144,11 @@
     goog.dom.appendChild(goog.dom.getElement('closure-tracker-expanded-panel'),
       eventPanel);
 
-    goog.events.listen(goog.dom.getElement('closure-tracker-main-panel').children[0],
+    goog.events.listen(
+      goog.dom.getElement('closure-tracker-main-panel').children[0],
       goog.events.EventType.CLICK,
-      togglePanel);
+      togglePanel
+    );
   };
 
   /**
@@ -121,14 +156,14 @@
    */
   dependencyLoaderId = setInterval(startApp, 1000);
   function startApp() {
-    console.log('Closure Tracker -- Still Loading.')
+    console.log('Closure Tracker -- Still Loading.');
     if (window.ctrackerTemplatesLoaded) {
-      console.log('Closure Tracker -- Templates Loaded.')
       clearInterval(dependencyLoaderId);
-      dependenciesLoaded = true;
       goog.require('ctracker.templates');
+      console.log('Closure Tracker -- Templates Loaded.');
       setup();
-      console.log('Closure Tracker -- Loading Complete.')
+      console.log('Closure Tracker -- Loading Complete.');
+      dependenciesLoaded = true;
     }
   };
 }());

@@ -9,7 +9,7 @@ goog.require('soy.StringBuilder');
 
 ctracker.templates.options_panel = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<span>Clear All</span>');
+  output.append('<span class="ctracker-listener-count"></span><span class="ctracker-clear-all">Clear All</span>');
   return opt_sb ? '' : output.toString();
 };
 
