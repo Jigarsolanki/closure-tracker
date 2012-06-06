@@ -1,7 +1,7 @@
 (function() {
 
   var oListen, oUnlistenByKey, oFireListener, eventAggregator,
-    dependenciesLoaded;
+    dependenciesLoaded, dependencyLoaderId;
 
   eventAggregator = {};
 
@@ -100,12 +100,17 @@
   /**
    * START OUR APP HERE.
    */
-  while (!dependenciesLoaded) {
-    if (ctrackerTemplatesLoaded) {
+  dependencyLoaderId = setInterval(startApp, 1000);
+  function startApp() {
+    console.log('Closure Tracker -- Still Loading.')
+    if (window.ctrackerTemplatesLoaded) {
+      console.log('Closure Tracker -- Templates Loaded.')
+      clearInterval(dependencyLoaderId);
       dependenciesLoaded = true;
       goog.require('ctracker.templates');
       setup();
+      console.log('Closure Tracker -- Loading Complete.')
     }
-  }
+  };
 }());
 

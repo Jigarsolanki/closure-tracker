@@ -1,3 +1,5 @@
+window.ctrackerTemplatesLoaded = false;
+
 var script, style, templates, mainPanelElement, expandedPanelElement,
   titleElement;
 
@@ -14,7 +16,7 @@ document.body.appendChild(script);
 templates = document.createElement('script');
 templates.src = '/site_media/js/ck/templates/ctracker_templates.js';
 templates.type = 'text/javascript';
-templates.setAttribute('onload', 'ctrackerTemplatesLoaded = true;');
+templates.setAttribute('onload', 'window.ctrackerTemplatesLoaded = true;');
 document.body.appendChild(templates);
 
 mainPanelElement = document.createElement('div');
