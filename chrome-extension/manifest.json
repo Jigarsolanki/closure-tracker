@@ -1,10 +1,11 @@
 {
-	"name": "closure event override",
-	"version": "0.0.0.1",
-	"content_scripts": [
-		{
-		"matches": ["http://127.0.0.1/*", "https://127.0.0.1/*", "http://localhost/*"],
-		"js": ["script.js"]
-		}
-	]
+    "name": "closure event override",
+    "version": "0.0.0.1",
+    "content_scripts": [
+        {
+        "matches": ["http://127.0.0.1/*", "https://127.0.0.1/*", "http://localhost/*"],
+        "js": ["script.js"],
+        "css": ["ctracker.css"]
+        }
+    ]
 }
