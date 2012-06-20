@@ -149,6 +149,8 @@
       goog.events.EventType.CLICK,
       togglePanel
     );
+
+    renderAggregatedEvents();
   };
 
   /**
