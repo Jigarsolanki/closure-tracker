@@ -7,6 +7,11 @@ script = document.createElement('script');
 script.src = '/site_media/js/ctracker.js';
 document.body.appendChild(script);
 
+script = document.createElement('script');
+script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js';
+document.body.appendChild(script);
+
+
 templates = document.createElement('script');
 templates.src = '/site_media/js/ck/templates/ctracker_templates.js';
 templates.type = 'text/javascript';
