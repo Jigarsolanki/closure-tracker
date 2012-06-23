@@ -2,10 +2,11 @@
 
   var oListen, oUnlistenByKey, oFireListener, eventAggregator,
     dependenciesLoaded, dependencyLoaderId, recentEvents, eventChart,
-    eventListenerCount, gauge, eventCount;
+    eventListenerCount, gauge, eventCount, sparklineListenerMax;
 
   eventAggregator = {};
   recentEvents = {};
+  sparklineListenerMax = 5000;
   eventCount = 0;
 
   oFireListener = goog.events.fireListener;
@@ -273,6 +274,11 @@
     var mpoints_max = 25;
     var mdraw = function() {
 
+      var listenerCount = goog.events.getTotalListenerCount();
+      if ((listenerCount * .10) + listenerCount > sparklineListenerMax) {
+        sparklineListenerMax += (listenerCount * .5);
+      }
+
       eventCount.push(goog.events.getTotalListenerCount());
       if (eventCount.length > mpoints_max){
         eventCount.splice(0,1);
@@ -282,7 +288,7 @@
         height: 200,
         tooltipSuffix: ' Total Listeners',
         lineColor:'#00FF00',
-        chartRangeMax: 10000
+        chartRangeMax: sparklineListenerMax
       });
 
       setTimeout(mdraw, refreshinterval);
