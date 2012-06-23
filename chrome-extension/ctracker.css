@@ -6,12 +6,13 @@
   font-weight: bold;
   font-size: 13px;
   width: 100%;
+  background-color: #eeeeff;
 }
 
 #closure-tracker-main-panel p {
-  border-top: 2px solid black;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
   background-color: white;
   width: 100px;
   margin: 0px auto;
@@ -19,7 +20,7 @@
 }
 
 #closure-tracker-expanded-panel {
-  border-top: 2px solid black;
+  border-top: 1px solid black;
   background-color: white;
   width: 100%;
   height: 320px;
