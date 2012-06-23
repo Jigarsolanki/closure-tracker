@@ -6,7 +6,7 @@
 
   eventAggregator = {};
   recentEvents = {};
-  sparklineListenerMax = 5000;
+  sparklineListenerMax = 10000;
   eventCount = 0;
 
   oFireListener = goog.events.fireListener;
@@ -223,7 +223,7 @@
     recentEvents = [];
     recentEventsPanel = goog.dom.getElementByClass('ctracker-event-activity-list');
     goog.dom.removeChildren(recentEventsPanel);
-    renderAggregatedEvents();
+    eventChart.clearChart();
   }
 
   function setup() {
@@ -275,19 +275,18 @@
     var mdraw = function() {
 
       var listenerCount = goog.events.getTotalListenerCount();
-      if ((listenerCount * .10) + listenerCount > sparklineListenerMax) {
-        sparklineListenerMax += (listenerCount * .5);
-      }
 
-      eventCount.push(goog.events.getTotalListenerCount());
+      eventCount.push(listenerCount);
       if (eventCount.length > mpoints_max){
         eventCount.splice(0,1);
       }
       $('#ctracker-listener-line').sparkline(eventCount, {
         width: eventCount.length * 7,
-        height: 200,
+        height: 250,
         tooltipSuffix: ' Total Listeners',
-        lineColor:'#00FF00',
+        lineColor: '#53a053',
+        spotRadius: 3,
+        lineWidth: 4,
         chartRangeMax: sparklineListenerMax
       });
 
