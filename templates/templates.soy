@@ -5,24 +5,29 @@
  */
 {template .options_panel}
 <span class="ctracker-clear-all">Clear All</span>
-<span id="ctracker-listener-line"></span>
-<span></span>
 {/template}
 
 /**
  * The event panel
  */
 {template .event_panel}
-<div>
-  <div class="ctracker-event-aggregated">
-  </div>
+<table>
+  <tr>
+  <td>
+  <div class="ctracker-event-aggregated"></div>
+  </td>
+  <td>
   <div class="ctracker-event-activity">
     <div class="ctracker-event-activity-title">Click to view in console</div>
     <div class="ctracker-event-activity-exclude"><input placeholder="Comma-delimited list to exclude..." /></div>
     <div class="ctracker-event-activity-list"></div>
   </div>
-  <div class="ctracker-eve"
-</div>
+  </td>
+  <td class="ctracker-event-activity-gauge">
+    <span>Event Listener Monitoring</span>
+    <span class="ctracker-event-activity-gauge" id="ctracker-listener-line">Loading...</span>
+ </tr>
+</table>
 {/template}
 
 /**

@@ -7,39 +7,6 @@
   eventAggregator = {};
   recentEvents = {};
 
-  // /**
-  //  * OVERRIDE GOOGLE LIBRARIES TO TRACK THINGS
-  //  */
-  // oListen = goog.events.listen;
-  // goog.events.listen = function() {
-
-  //   if (dependenciesLoaded) {
-
-  //     var listenerCountElement;
-
-  //     listenerCountElement = goog.dom.getElementByClass(
-  //       'ctracker-listener-count');
-  //     goog.dom.setTextContent(listenerCountElement,
-  //       goog.events.getTotalListenerCount());
-  //   }
-  //   return oListen.apply(this, arguments);
-  // };
-
-  // oUnlistenByKey = goog.events.unlistenByKey;
-  // goog.events.unlistenByKey = function() {
-
-  //   if (dependenciesLoaded) {
-
-  //     var listenerCountElement;
-
-  //     listenerCountElement = goog.dom.getElementByClass(
-  //       'ctracker-listener-count');
-  //     goog.dom.setTextContent(listenerCountElement,
-  //       goog.events.getTotalListenerCount());
-  //   }
-  //   return oUnlistenByKey.apply(this, arguments);
-  // };
-
   oFireListener = goog.events.fireListener;
   goog.events.fireListener = function() {
 
@@ -232,7 +199,7 @@
     setInterval(limitEventActivity, 10000);
   };
 
-  function doGoogleShit() {
+  function downloadGoogleDeps() {
     if (window['google'] != undefined && window['google']['loader'] != undefined) {
       if (!window['google']['visualization']) {
       window['google']['visualization'] = {};
@@ -245,27 +212,26 @@
   }
 
   function setUpSparklinesForEventListeners() {
-    var mrefreshinterval = 500; // update display every 500ms
-    var mpoints = [];
+    var refreshinterval = 500; // update display every 500ms
+    var eventCount = [];
     var mpoints_max = 25;
     var mdraw = function() {
 
-      mpoints.push(goog.events.getTotalListenerCount());
-      if (mpoints.length > mpoints_max){
-        mpoints.splice(0,1);
+      eventCount.push(goog.events.getTotalListenerCount());
+      if (eventCount.length > mpoints_max){
+        eventCount.splice(0,1);
       }
-      mousetravel = 0;
-      console.log(mpoints.length*2);
-      $('#ctracker-listener-line').sparkline(mpoints, {
-        width: mpoints.length*2,
-        tooltipSuffix: ' total listeners'
+      $('#ctracker-listener-line').sparkline(eventCount, {
+        width: eventCount.length*7,
+        height: 200,
+        tooltipSuffix: ' total listeners',
+        lineColor:'#00FF00'
       });
 
-      setTimeout(mdraw, mrefreshinterval);
+      setTimeout(mdraw, refreshinterval);
     }
-    setTimeout(mdraw, mrefreshinterval);
+    setTimeout(mdraw, refreshinterval);
   };
-
 
   /**
    * START OUR APP HERE.
@@ -273,14 +239,14 @@
   dependencyLoaderId = setInterval(startApp, 1000);
   function startApp() {
     console.log('Closure Tracker -- Still Loading.');
-    if (window.ctrackerFilesLoaded === 4) {
+    if (window.ctrackerFilesLoaded === 3) {
       clearInterval(dependencyLoaderId);
       goog.require('ctracker.templates');
       console.log('Closure Tracker -- Templates Loaded.');
       setup();
       console.log('Closure Tracker -- Loading Complete.');
       dependenciesLoaded = true;
-      doGoogleShit();
+      downloadGoogleDeps();
       setUpSparklinesForEventListeners();
     }
   };

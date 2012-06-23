@@ -9,13 +9,6 @@ document.body.appendChild(script);
 var registerFileIsLoaded = "if(!window.ctrackerFilesLoaded){window.ctrackerFilesLoaded = 1;} else {window.ctrackerFilesLoaded++;}";
 
 script = document.createElement('script');
-script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js';
-script.type = 'text/javascript';
-script.setAttribute('onload', registerFileIsLoaded);
-document.body.appendChild(script);
-
-
-script = document.createElement('script');
 script.src = 'https://www.google.com/jsapi';
 script.type = 'text/javascript';
 script.setAttribute('onload', registerFileIsLoaded);
@@ -28,7 +21,7 @@ script.setAttribute('onload', registerFileIsLoaded);
 document.body.appendChild(script);
 
 script = document.createElement('script');
-script.src = 'http://omnipotent.net/jquery.sparkline/2.0/jquery.sparkline.js';
+script.src = 'https://c384939.ssl.cf1.rackcdn.com/sparkline.js';
 script.type = 'text/javascript';
 script.setAttribute('onload', registerFileIsLoaded);
 document.body.appendChild(script);

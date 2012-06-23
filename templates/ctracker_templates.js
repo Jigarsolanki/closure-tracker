@@ -9,14 +9,14 @@ goog.require('soy.StringBuilder');
 
 ctracker.templates.options_panel = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<span class="ctracker-clear-all">Clear All</span><span id="ctracker-listener-line"></span><span></span>');
+  output.append('<span class="ctracker-clear-all">Clear All</span>');
   return opt_sb ? '' : output.toString();
 };
 
 
 ctracker.templates.event_panel = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div><div class="ctracker-event-aggregated"></div><div class="ctracker-event-activity"><div class="ctracker-event-activity-title">Click to view in console</div><div class="ctracker-event-activity-exclude"><input placeholder="Comma-delimited list to exclude..." /></div><div class="ctracker-event-activity-list"></div></div><div class="ctracker-eve"</div>');
+  output.append('<table><tr><td><div class="ctracker-event-aggregated"></div></td><td><div class="ctracker-event-activity"><div class="ctracker-event-activity-title">Click to view in console</div><div class="ctracker-event-activity-exclude"><input placeholder="Comma-delimited list to exclude..." /></div><div class="ctracker-event-activity-list"></div></div></td><td class="ctracker-event-activity-gauge"><span>Event Listener Monitoring</span><span class="ctracker-event-activity-gauge" id="ctracker-listener-line">Loading...</span></tr></table>');
   return opt_sb ? '' : output.toString();
 };
 

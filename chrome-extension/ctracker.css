@@ -46,8 +46,8 @@
   color: red;
 }
 
-.ctracker-event-aggregated, .ctracker-event-activity {
-  overflow-y: scroll;
+.ctracker-event-aggregated, .ctracker-event-activity,
+  .ctracker-event-activity-gauge {
   text-align: left;
   height: 280px;
   width: 360px;
@@ -55,6 +55,13 @@
   margin: 10px;
 }
 
+ .ctracker-event-activity-gauge {
+  float: left;
+ }
+
+.ctracker-event-activity{
+  overflow-y: scroll;
+}
 .ctracker-event-activity-title {
   color: green;
   margin-bottom: 5px;
