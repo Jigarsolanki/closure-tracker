@@ -4,8 +4,8 @@
  * The event panel
  */
 {template .options_panel}
-<span class="ctracker-listener-count"></span>
 <span class="ctracker-clear-all">Clear All</span>
+<span id="ctracker-listener-line"></span>
 {/template}
 
 /**
@@ -25,5 +25,9 @@
  * @param singleEvent
  */
 {template .event_output}
+<<<<<<< HEAD
 (<span class="ctracker-view-single-event">view in console</span>) -- {$singleEvent.name} event fired.
+=======
+  {$singleEvent.type} -- {$singleEvent.name} acting on {$singleEvent.target}
+>>>>>>> 0f4f6d21d56f49b2bff842af36a77410ffafd112
 {/template}
