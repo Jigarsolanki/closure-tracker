@@ -55,8 +55,11 @@
   margin: 10px;
 }
 
-.eps-label{
+.ctracker-label{
   color: green;
+}
+
+.eps-label{
   padding-left: 60px;
 }
 
