@@ -1,4 +1,3 @@
-window.ctrackerFilesLoaded2 = 0;
 
 var script, mainPanelElement, expandedPanelElement,
   titleElement;
