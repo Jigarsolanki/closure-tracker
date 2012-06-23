@@ -37,6 +37,6 @@ ctracker.templates.aggregated_events = function(opt_data, opt_sb) {
 
 ctracker.templates.event_output = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append(soy.$$escapeHtml(opt_data.singleEvent.type), ' -- ', soy.$$escapeHtml(opt_data.singleEvent.name), ' acting on ', soy.$$escapeHtml(opt_data.singleEvent.target));
+  output.append('(<span class="ctracker-view-single-event" onClick="console.log(this);">view in console</span>) -- ', soy.$$escapeHtml(opt_data.singleEvent.name), ' event fired.');
   return opt_sb ? '' : output.toString();
 };

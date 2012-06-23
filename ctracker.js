@@ -1,9 +1,10 @@
 (function() {
 
   var oListen, oUnlistenByKey, oFireListener, eventAggregator,
-    dependenciesLoaded, dependencyLoaderId;
+    dependenciesLoaded, dependencyLoaderId, recentEvents;
 
   eventAggregator = {};
+  recentEvents = {};
 
   /**
    * OVERRIDE GOOGLE LIBRARIES TO TRACK THINGS
@@ -50,8 +51,7 @@
     if (!eventObject.getBrowserEvent) {
 
       currentEvent = {
-        type: eventType,
-        target: eventObject.target.toString(),
+        target: eventObject.target,
         name: eventType.toString()
       };
 
@@ -76,20 +76,60 @@
    */
   function renderSingleEvent(currentEvent) {
 
-    var singleEventElement;
+    var singleEventElement, eventActivityElement, id, eventHandler;
+
+    eventActivityElement = goog.dom.getElementByClass(
+      'ctracker-event-activity');
+
+    limitEventActivity(2000);
 
     singleEventElement = goog.dom.createElement('div');
-    goog.dom.setTextContent(
+    singleEventElement.innerHTML = ctracker.templates.event_output({
+      singleEvent: currentEvent
+    });
+
+    id = 'ctracker-' + goog.getUid(currentEvent.target);
+    singleEventElement.closure_id = id;
+    recentEvents[id] = currentEvent.target;
+
+    eventHandler = new goog.events.EventHandler();
+    eventHandler.listen(
       singleEventElement,
-      ctracker.templates.event_output({
-        singleEvent: currentEvent
-      })
+      goog.events.EventType.CLICK,
+      function() {
+        console.log(currentEvent.target);
+      },
+      undefined,
+      this
     );
+    eventHandler.registerDisposable(singleEventElement);
+
     goog.dom.insertChildAt(
-      goog.dom.getElementByClass('ctracker-event-activity'),
+      eventActivityElement,
       singleEventElement,
       0
     );
+  };
+
+  function limitEventActivity(maximum) {
+
+    var x, eventActivityElement, id;
+
+    maximum = maximum || 200;
+
+    eventActivityElement = goog.dom.getElementByClass(
+      'ctracker-event-activity');
+    if (eventActivityElement.children.length > 200) {
+
+      x = eventActivityElement.children.length - 1;
+      for (x; x > maximum; x--) {
+        id = eventActivityElement.children[x].closure_id;
+        if (goog.dom.query('closure_id=' + id, eventActivityElement).length === 0) {
+          delete recentEvents[id];
+        }
+        goog.dom.removeNode(eventActivityElement.children[x]);
+      }
+    }
   };
 
   function renderAggregatedEvents() {
@@ -151,6 +191,8 @@
     );
 
     renderAggregatedEvents();
+
+    setInterval(limitEventActivity, 10000);
   };
 
   /**
