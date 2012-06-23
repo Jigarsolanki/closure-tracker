@@ -16,7 +16,7 @@ ctracker.templates.options_panel = function(opt_data, opt_sb) {
 
 ctracker.templates.event_panel = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div><div class="ctracker-event-aggregated"></div><div class="ctracker-event-activity"><div class="ctracker-event-activity-title">Click to view in console</div><div class="ctracker-event-activity-exclude"><input value="Comma-delimited list to exclude..." /></div><div class="ctracker-event-activity-list"></div></div></div>');
+  output.append('<div><div class="ctracker-event-aggregated"></div><div class="ctracker-event-activity"><div class="ctracker-event-activity-title">Click to view in console</div><div class="ctracker-event-activity-exclude"><input placeholder="Comma-delimited list to exclude..." /></div><div class="ctracker-event-activity-list"></div></div><div class="ctracker-eve"</div>');
   return opt_sb ? '' : output.toString();
 };
 
