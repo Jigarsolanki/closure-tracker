@@ -1,42 +1,42 @@
 (function() {
 
   var oListen, oUnlistenByKey, oFireListener, eventAggregator,
-    dependenciesLoaded, dependencyLoaderId, eventChart;
+    dependenciesLoaded, dependencyLoaderId, eventChart, eventListenerCount;
 
   eventAggregator = {};
 
-  /**
-   * OVERRIDE GOOGLE LIBRARIES TO TRACK THINGS
-   */
-  oListen = goog.events.listen;
-  goog.events.listen = function() {
+  // /**
+  //  * OVERRIDE GOOGLE LIBRARIES TO TRACK THINGS
+  //  */
+  // oListen = goog.events.listen;
+  // goog.events.listen = function() {
 
-    if (dependenciesLoaded) {
+  //   if (dependenciesLoaded) {
 
-      var listenerCountElement;
+  //     var listenerCountElement;
 
-      listenerCountElement = goog.dom.getElementByClass(
-        'ctracker-listener-count');
-      goog.dom.setTextContent(listenerCountElement,
-        goog.events.getTotalListenerCount());
-    }
-    return oListen.apply(this, arguments);
-  };
+  //     listenerCountElement = goog.dom.getElementByClass(
+  //       'ctracker-listener-count');
+  //     goog.dom.setTextContent(listenerCountElement,
+  //       goog.events.getTotalListenerCount());
+  //   }
+  //   return oListen.apply(this, arguments);
+  // };
 
-  oUnlistenByKey = goog.events.unlistenByKey;
-  goog.events.unlistenByKey = function() {
+  // oUnlistenByKey = goog.events.unlistenByKey;
+  // goog.events.unlistenByKey = function() {
 
-    if (dependenciesLoaded) {
+  //   if (dependenciesLoaded) {
 
-      var listenerCountElement;
+  //     var listenerCountElement;
 
-      listenerCountElement = goog.dom.getElementByClass(
-        'ctracker-listener-count');
-      goog.dom.setTextContent(listenerCountElement,
-        goog.events.getTotalListenerCount());
-    }
-    return oUnlistenByKey.apply(this, arguments);
-  };
+  //     listenerCountElement = goog.dom.getElementByClass(
+  //       'ctracker-listener-count');
+  //     goog.dom.setTextContent(listenerCountElement,
+  //       goog.events.getTotalListenerCount());
+  //   }
+  //   return oUnlistenByKey.apply(this, arguments);
+  // };
 
   oFireListener = goog.events.fireListener;
   goog.events.fireListener = function() {
@@ -188,15 +188,38 @@
       }
       google.loader.writeLoadTag("script", google.loader.ServiceBase + "/api/visualization/1.0/b8ead078cfbbc014864e12c526655941/format+en,default,corechart.I.js", true);
     }
-    google.setOnLoadCallback(function(){console.log("ASDFASDFASDFFDS")});
   }
+
+  function setUpSparklinesForEventListeners() {
+    var mrefreshinterval = 500; // update display every 500ms
+    var mpoints = [];
+    var mpoints_max = 25;
+    var mdraw = function() {
+
+      mpoints.push(goog.events.getTotalListenerCount());
+      if (mpoints.length > mpoints_max){
+        mpoints.splice(0,1);
+      }
+      mousetravel = 0;
+      console.log(mpoints.length*2);
+      $('#ctracker-listener-line').sparkline(mpoints, {
+        width: mpoints.length*2,
+        tooltipSuffix: ' total listeners'
+      });
+
+      setTimeout(mdraw, mrefreshinterval);
+    }
+    setTimeout(mdraw, mrefreshinterval);
+  };
+
+
   /**
    * START OUR APP HERE.
    */
   dependencyLoaderId = setInterval(startApp, 1000);
   function startApp() {
     console.log('Closure Tracker -- Still Loading.');
-    if (window.ctrackerFilesLoaded === 3) {
+    if (window.ctrackerFilesLoaded === 4) {
       clearInterval(dependencyLoaderId);
       goog.require('ctracker.templates');
       console.log('Closure Tracker -- Templates Loaded.');
@@ -204,6 +227,7 @@
       console.log('Closure Tracker -- Loading Complete.');
       dependenciesLoaded = true;
       doGoogleShit();
+      setUpSparklinesForEventListeners();
     }
   };
 }());
