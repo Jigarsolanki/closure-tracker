@@ -2,10 +2,11 @@
 
   var oListen, oUnlistenByKey, oFireListener, eventAggregator,
     dependenciesLoaded, dependencyLoaderId, recentEvents, eventChart,
-    eventListenerCount;
+    eventListenerCount, gauge, eventCount;
 
   eventAggregator = {};
   recentEvents = {};
+  eventCount = 0;
 
   oFireListener = goog.events.fireListener;
   goog.events.fireListener = function() {
@@ -27,9 +28,11 @@
         eventAggregator[eventType.toString()] = 0;
       }
       eventAggregator[eventType] += 1;
+      eventCount += 1;
 
       if (dependenciesLoaded) {
         renderAggregatedEvents();
+        startEPSgauge();
         renderSingleEvent(currentEvent);
       }
     }
@@ -136,7 +139,7 @@
 
     var options = {
       title: 'Events',
-      vAxis: {title: 'EVent Type',  titleTextStyle: {color: 'red'}}
+      vAxis: {title: 'Event Type',  titleTextStyle: {color: 'red'}}
     };
 
     if(eventChart){
@@ -146,6 +149,50 @@
       renderAggregatedEvents();
     }
   };
+
+
+  function setUpGauge() {
+
+    var gaugeElement;
+
+    gaugeElement = goog.dom.getElementByClass(
+      'ctracker-event-gauge');
+    gauge = new google.visualization.Gauge(gaugeElement);
+  }
+
+  function getGaugeDataToDraw() {
+
+    var data;
+
+    data = [];
+    data = [
+      ['Label', 'Value'],
+      ['EPS', eventCount*2]
+    ];
+    eventCount = 0;
+    return data;
+  }
+
+  function renderGaugeData() {
+
+    var data = google.visualization.arrayToDataTable(getGaugeDataToDraw());
+
+    var options = {
+      width: 400, height: 120,
+      redFrom: 90, redTo: 100,
+      yellowFrom:75, yellowTo: 90,
+      minorTicks: 1
+    };
+    gauge.draw(data, options);
+    setTimeout(renderGaugeData, 500);
+  };
+
+  function startEPSgauge(){
+    if(!gauge){
+      setUpGauge();
+      setTimeout(renderGaugeData, 500);
+    }
+  }
 
   /**
    * PANEL SETUP GOES HERE
@@ -207,6 +254,7 @@
       google.visualization.JSHash = 'b8ead078cfbbc014864e12c526655941';
       google.visualization.LoadArgs = 'file\75visualization\46v\0751\46packages\75corechart';
       }
+      google.loader.writeLoadTag("script", google.loader.ServiceBase + "/api/visualization/1.0/b8ead078cfbbc014864e12c526655941/format+en,default,gauge.I.js", true);
       google.loader.writeLoadTag("script", google.loader.ServiceBase + "/api/visualization/1.0/b8ead078cfbbc014864e12c526655941/format+en,default,corechart.I.js", true);
     }
   }
@@ -224,8 +272,9 @@
       $('#ctracker-listener-line').sparkline(eventCount, {
         width: eventCount.length*7,
         height: 200,
-        tooltipSuffix: ' total listeners',
-        lineColor:'#00FF00'
+        tooltipSuffix: ' Total Listeners',
+        lineColor:'#00FF00',
+        chartRangeMax: 10000
       });
 
       setTimeout(mdraw, refreshinterval);

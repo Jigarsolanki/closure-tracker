@@ -55,9 +55,16 @@
   margin: 10px;
 }
 
- .ctracker-event-activity-gauge {
+#ctracker-listener-line {
+  width: 200px;
+}
+
+.ctracker-event-gauge{
+  margin-left: 200px;
+}
+.ctracker-event-activity-gauge {
   float: left;
- }
+}
 
 .ctracker-event-activity{
   overflow-y: scroll;
