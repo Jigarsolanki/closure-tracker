@@ -31,7 +31,7 @@
       eventCount += 1;
 
       if (dependenciesLoaded) {
-        renderAggregatedEvents();
+        startEventChart();
         startEPSgauge();
         renderSingleEvent(currentEvent);
       }
@@ -142,12 +142,8 @@
       vAxis: {title: 'Event Type',  titleTextStyle: {color: 'red'}}
     };
 
-    if(eventChart){
-      eventChart.draw(data, options);
-    } else {
-      setUpEventChart();
-      renderAggregatedEvents();
-    }
+    eventChart.draw(data, options);
+    setTimeout(renderAggregatedEvents, 500);
   };
 
 
@@ -191,6 +187,13 @@
     if(!gauge){
       setUpGauge();
       setTimeout(renderGaugeData, 500);
+    }
+  }
+
+  function startEventChart(){
+    if(!eventChart){
+      setUpEventChart();
+      setTimeout(renderAggregatedEvents, 500);
     }
   }
 
@@ -270,7 +273,7 @@
         eventCount.splice(0,1);
       }
       $('#ctracker-listener-line').sparkline(eventCount, {
-        width: eventCount.length*7,
+        width: eventCount.length * 7,
         height: 200,
         tooltipSuffix: ' Total Listeners',
         lineColor:'#00FF00',
