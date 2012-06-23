@@ -21,25 +21,6 @@
 {/template}
 
 /**
- * An aggregated view of events
- * @param aggregatedEvents
- */
-{template .aggregated_events}
-<div>
-  <table>
-    <tr>
-      <th>Name</th><th>Count</th>
-    </tr>
-    {foreach $e in $aggregatedEvents}
-    <tr>
-      <td>{$e.name}</td><td>{$e.count}</td>
-    </tr>
-    {/foreach}
-  </table>
-</div>
-{/template}
-
-/**
  * Output from a single event to display
  * @param singleEvent
  */

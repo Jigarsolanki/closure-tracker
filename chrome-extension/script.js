@@ -1,17 +1,31 @@
-window.ctrackerTemplatesLoaded = false;
 
-var script, templates, mainPanelElement, expandedPanelElement,
+var script, mainPanelElement, expandedPanelElement,
   titleElement;
 
 script = document.createElement('script');
 script.src = '/site_media/js/ctracker.js';
 document.body.appendChild(script);
 
-templates = document.createElement('script');
-templates.src = '/site_media/js/ck/templates/ctracker_templates.js';
-templates.type = 'text/javascript';
-templates.setAttribute('onload', 'window.ctrackerTemplatesLoaded = true;');
-document.body.appendChild(templates);
+var registerFileIsLoaded = "if(!window.ctrackerFilesLoaded){window.ctrackerFilesLoaded = 1;} else {window.ctrackerFilesLoaded++;}";
+
+script = document.createElement('script');
+script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js';
+script.type = 'text/javascript';
+script.setAttribute('onload', registerFileIsLoaded);
+document.body.appendChild(script);
+
+
+script = document.createElement('script');
+script.src = 'https://www.google.com/jsapi';
+script.type = 'text/javascript';
+script.setAttribute('onload', registerFileIsLoaded);
+document.body.appendChild(script);
+
+script = document.createElement('script');
+script.src = '/site_media/js/ck/templates/ctracker_templates.js';
+script.type = 'text/javascript';
+script.setAttribute('onload', registerFileIsLoaded);
+document.body.appendChild(script);
 
 mainPanelElement = document.createElement('div');
 mainPanelElement.id = 'closure-tracker-main-panel';
