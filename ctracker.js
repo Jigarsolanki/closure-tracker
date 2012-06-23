@@ -125,7 +125,7 @@
     var data;
 
     data = [];
-    data.push(['Type', 'Times']);
+    data.push(['Type', 'Count']);
     goog.object.forEach(eventAggregator, function(value, key) {
       data.push([key,value]);
     });
@@ -138,7 +138,7 @@
     var data = google.visualization.arrayToDataTable(getDataToDraw());
 
     var options = {
-      title: 'Events',
+      width: 600, height: 325,
       vAxis: {title: 'Event Type',  titleTextStyle: {color: 'red'}}
     };
 

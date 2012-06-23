@@ -55,12 +55,21 @@
   margin: 10px;
 }
 
+.eps-label{
+  color: green;
+  padding-left: 60px;
+}
+
+.ctracker-event-aggregated{
+  width: 600px;
+}
 #ctracker-listener-line {
   width: 200px;
 }
 
 .ctracker-event-gauge{
   margin-left: 200px;
+  margin-top: 50px;
 }
 .ctracker-event-activity-gauge {
   float: left;
