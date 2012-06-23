@@ -2,10 +2,11 @@
 
   var oListen, oUnlistenByKey, oFireListener, eventAggregator,
     dependenciesLoaded, dependencyLoaderId, recentEvents, eventChart,
-    eventListenerCount, gauge, eventCount;
+    eventListenerCount, gauge, eventCount, sparklineListenerMax;
 
   eventAggregator = {};
   recentEvents = {};
+  sparklineListenerMax = 5000;
   eventCount = 0;
 
   oFireListener = goog.events.fireListener;
@@ -202,11 +203,16 @@
    */
   function togglePanel() {
 
-    var expandedPanel;
+    var expandedPanel, reachPageBody;
 
     expandedPanel = goog.dom.getElement('closure-tracker-expanded-panel');
+    reachPageBody = goog.dom.getElement('page');
+    isPanelShown = goog.style.isElementShown(expandedPanel);
+
+    goog.dom.classes.enable(reachPageBody, 'ctracker-panel-padding',
+      !isPanelShown);
     goog.style.showElement(expandedPanel,
-      !goog.style.isElementShown(expandedPanel));
+      !isPanelShown);
   };
 
   function clearPanels() {
@@ -268,6 +274,11 @@
     var mpoints_max = 25;
     var mdraw = function() {
 
+      var listenerCount = goog.events.getTotalListenerCount();
+      if ((listenerCount * .10) + listenerCount > sparklineListenerMax) {
+        sparklineListenerMax += (listenerCount * .5);
+      }
+
       eventCount.push(goog.events.getTotalListenerCount());
       if (eventCount.length > mpoints_max){
         eventCount.splice(0,1);
@@ -277,7 +288,7 @@
         height: 200,
         tooltipSuffix: ' Total Listeners',
         lineColor:'#00FF00',
-        chartRangeMax: 10000
+        chartRangeMax: sparklineListenerMax
       });
 
       setTimeout(mdraw, refreshinterval);
