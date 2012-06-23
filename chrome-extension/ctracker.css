@@ -55,6 +55,24 @@
   margin: 10px;
 }
 
+.ctracker-event-activity-title {
+  color: green;
+  margin-bottom: 5px;
+}
+
+.ctracker-event-activity-exclude input {
+  width: 320px;
+}
+
+.ctracker-event-activity-list div {
+  cursor: pointer;
+  color: blue;
+}
+
+.ctracker-event-activity-list div:hover {
+  background-color: lightgrey;
+}
+
 .ctracker-event-aggregated table {
   width: 280px;
 }

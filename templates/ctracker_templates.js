@@ -9,20 +9,20 @@ goog.require('soy.StringBuilder');
 
 ctracker.templates.options_panel = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<span class="ctracker-clear-all">Clear All</span><span id="ctracker-listener-line"></span>');
+  output.append('<span class="ctracker-clear-all">Clear All</span><span id="ctracker-listener-line"></span><span></span>');
   return opt_sb ? '' : output.toString();
 };
 
 
 ctracker.templates.event_panel = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div><div class="ctracker-event-aggregated"></div><div class="ctracker-event-activity"></div></div>');
+  output.append('<div><div class="ctracker-event-aggregated"></div><div class="ctracker-event-activity"><div class="ctracker-event-activity-title">Click to view in console</div><div class="ctracker-event-activity-exclude"><input value="Comma-delimited list to exclude..." /></div><div class="ctracker-event-activity-list"></div></div></div>');
   return opt_sb ? '' : output.toString();
 };
 
 
 ctracker.templates.event_output = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<<<<<<< HEAD (<span class="ctracker-view-single-event">view in console</span>) -- ', soy.$$escapeHtml(opt_data.singleEvent.name), ' event fired. =======', soy.$$escapeHtml(opt_data.singleEvent.type), ' -- ', soy.$$escapeHtml(opt_data.singleEvent.name), ' acting on ', soy.$$escapeHtml(opt_data.singleEvent.target), '>>>>>>> 0f4f6d21d56f49b2bff842af36a77410ffafd112');
+  output.append('** ', soy.$$escapeHtml(opt_data.singleEvent.name), ' ** was fired.');
   return opt_sb ? '' : output.toString();
 };

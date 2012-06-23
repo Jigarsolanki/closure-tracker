@@ -28,7 +28,7 @@ script.setAttribute('onload', registerFileIsLoaded);
 document.body.appendChild(script);
 
 script = document.createElement('script');
-script.src = 'http://omnipotent.net/jquery.sparkline/2.0/jquery.sparkline.min.js';
+script.src = 'http://omnipotent.net/jquery.sparkline/2.0/jquery.sparkline.js';
 script.type = 'text/javascript';
 script.setAttribute('onload', registerFileIsLoaded);
 document.body.appendChild(script);

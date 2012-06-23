@@ -74,39 +74,50 @@
    */
   function renderSingleEvent(currentEvent) {
 
-    var singleEventElement, eventActivityElement, id, eventHandler;
+    var singleEventElement, eventActivityElement, id, eventHandler,
+      exclusionList, exclusionListInput;
 
     eventActivityElement = goog.dom.getElementByClass(
-      'ctracker-event-activity');
+      'ctracker-event-activity-list');
 
     limitEventActivity(2000);
 
-    singleEventElement = goog.dom.createElement('div');
-    singleEventElement.innerHTML = ctracker.templates.event_output({
-      singleEvent: currentEvent
-    });
+    exclusionList = [];
+    exclusionListInput = goog.dom.getElementByClass(
+      'ctracker-event-activity-exclude').children[0];
+    if (goog.dom.forms.getValue(exclusionListInput) !==
+      'Comma-delimited list to exclude...') {
+      exclusionList = goog.dom.forms.getValue(exclusionListInput).split(',');
+    }
 
-    id = 'ctracker-' + goog.getUid(currentEvent.target);
-    singleEventElement.closure_id = id;
-    recentEvents[id] = currentEvent.target;
+    if (!goog.array.contains(exclusionList, currentEvent.name)) {
+      singleEventElement = goog.dom.createElement('div');
+      singleEventElement.innerHTML = ctracker.templates.event_output({
+        singleEvent: currentEvent
+      });
 
-    eventHandler = new goog.events.EventHandler();
-    eventHandler.listen(
-      singleEventElement,
-      goog.events.EventType.CLICK,
-      function() {
-        console.log(currentEvent.target);
-      },
-      undefined,
-      this
-    );
-    eventHandler.registerDisposable(singleEventElement);
+      id = 'ctracker-' + goog.getUid(currentEvent.target);
+      singleEventElement.closure_id = id;
+      recentEvents[id] = currentEvent.target;
 
-    goog.dom.insertChildAt(
-      eventActivityElement,
-      singleEventElement,
-      0
-    );
+      eventHandler = new goog.events.EventHandler();
+      eventHandler.listen(
+        singleEventElement,
+        goog.events.EventType.CLICK,
+        function() {
+          console.log(currentEvent.target);
+        },
+        undefined,
+        this
+      );
+      eventHandler.registerDisposable(singleEventElement);
+
+      goog.dom.insertChildAt(
+        eventActivityElement,
+        singleEventElement,
+        0
+      );
+    }
   };
 
   function limitEventActivity(maximum) {
@@ -116,7 +127,7 @@
     maximum = maximum || 200;
 
     eventActivityElement = goog.dom.getElementByClass(
-      'ctracker-event-activity');
+      'ctracker-event-activity-list');
     if (eventActivityElement.children.length > 200) {
 
       x = eventActivityElement.children.length - 1;
@@ -183,11 +194,13 @@
 
   function clearPanels() {
 
-    var eventPanel;
+    var recentEventsPanel;
 
-    eventPanel = goog.dom.getElement('ctracker-event-panel');
-    eventPanel.innerHTML = ctracker.templates.event_panel({});
-    eventAggregator = {};
+    eventAggregator = {ctracker_clear: 1};
+    recentEvents = [];
+    recentEventsPanel = goog.dom.getElementByClass('ctracker-event-activity-list');
+    goog.dom.removeChildren(recentEventsPanel);
+    renderAggregatedEvents();
   }
 
   function setup() {
@@ -215,8 +228,6 @@
       goog.events.EventType.CLICK,
       togglePanel
     );
-
-    renderAggregatedEvents();
 
     setInterval(limitEventActivity, 10000);
   };
