@@ -202,11 +202,16 @@
    */
   function togglePanel() {
 
-    var expandedPanel;
+    var expandedPanel, reachPageBody;
 
     expandedPanel = goog.dom.getElement('closure-tracker-expanded-panel');
+    reachPageBody = goog.dom.getElement('page');
+    isPanelShown = goog.style.isElementShown(expandedPanel);
+
+    goog.dom.classes.enable(reachPageBody, 'ctracker-panel-padding',
+      !isPanelShown);
     goog.style.showElement(expandedPanel,
-      !goog.style.isElementShown(expandedPanel));
+      !isPanelShown);
   };
 
   function clearPanels() {
