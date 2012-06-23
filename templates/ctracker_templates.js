@@ -30,7 +30,7 @@ ctracker.templates.aggregated_events = function(opt_data, opt_sb) {
     var eData8 = eList8[eIndex8];
     output.append('<tr><td>', soy.$$escapeHtml(eData8.name), '</td><td>', soy.$$escapeHtml(eData8.count), '</td></tr>');
   }
-  output.append('</table></div>');
+  output.append('</table></div><div id="ctraker-event-plot"></div>');
   return opt_sb ? '' : output.toString();
 };
 

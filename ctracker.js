@@ -1,7 +1,7 @@
 (function() {
 
   var oListen, oUnlistenByKey, oFireListener, eventAggregator,
-    dependenciesLoaded, dependencyLoaderId;
+    dependenciesLoaded, dependencyLoaderId, eventChart;
 
   eventAggregator = {};
 
@@ -55,13 +55,10 @@
         name: eventType.toString()
       };
 
-      if (!eventAggregator[eventType]) {
-        eventAggregator[eventType] = {
-          count: 0,
-          name: eventType.toString()
-        };
+      if (!eventAggregator[eventType.toString()]) {
+        eventAggregator[eventType.toString()] = 0;
       }
-      eventAggregator[eventType].count += 1;
+      eventAggregator[eventType] += 1;
 
       if (dependenciesLoaded) {
         renderAggregatedEvents();
@@ -92,15 +89,44 @@
     );
   };
 
-  function renderAggregatedEvents() {
+  function setUpEventChart() {
 
     var aggregatedEventElement;
 
     aggregatedEventElement = goog.dom.getElementByClass(
       'ctracker-event-aggregated');
-    aggregatedEventElement.innerHTML = ctracker.templates.aggregated_events({
-      aggregatedEvents: goog.object.getValues(eventAggregator)
+    eventChart = new google.visualization.BarChart(aggregatedEventElement);
+  }
+
+
+  function getDataToDraw() {
+
+    var data;
+
+    data = [];
+    data.push(['Type', 'Times']);
+    goog.object.forEach(eventAggregator, function(value, key) {
+      data.push([key,value]);
     });
+
+    return data;
+  }
+
+  function renderAggregatedEvents() {
+
+    var data = google.visualization.arrayToDataTable(getDataToDraw());
+
+    var options = {
+      title: 'Events',
+      vAxis: {title: 'EVent Type',  titleTextStyle: {color: 'red'}}
+    };
+
+    if(eventChart){
+      eventChart.draw(data, options);
+    } else {
+      setUpEventChart();
+      renderAggregatedEvents();
+    }
   };
 
   /**
@@ -150,22 +176,34 @@
       togglePanel
     );
 
-    renderAggregatedEvents();
   };
 
+  function doGoogleShit() {
+    if (window['google'] != undefined && window['google']['loader'] != undefined) {
+      if (!window['google']['visualization']) {
+      window['google']['visualization'] = {};
+      google.visualization.Version = '1.0';
+      google.visualization.JSHash = 'b8ead078cfbbc014864e12c526655941';
+      google.visualization.LoadArgs = 'file\75visualization\46v\0751\46packages\75corechart';
+      }
+      google.loader.writeLoadTag("script", google.loader.ServiceBase + "/api/visualization/1.0/b8ead078cfbbc014864e12c526655941/format+en,default,corechart.I.js", true);
+    }
+    google.setOnLoadCallback(function(){console.log("ASDFASDFASDFFDS")});
+  }
   /**
    * START OUR APP HERE.
    */
   dependencyLoaderId = setInterval(startApp, 1000);
   function startApp() {
     console.log('Closure Tracker -- Still Loading.');
-    if (window.ctrackerTemplatesLoaded) {
+    if (window.ctrackerFilesLoaded === 3) {
       clearInterval(dependencyLoaderId);
       goog.require('ctracker.templates');
       console.log('Closure Tracker -- Templates Loaded.');
       setup();
       console.log('Closure Tracker -- Loading Complete.');
       dependenciesLoaded = true;
+      doGoogleShit();
     }
   };
 }());
