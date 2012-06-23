@@ -16,7 +16,7 @@ ctracker.templates.options_panel = function(opt_data, opt_sb) {
 
 ctracker.templates.event_panel = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<table><tr><td><div class="ctracker-event-aggregated"></div></td><td><div class="ctracker-event-activity"><div class="ctracker-event-activity-title">Click to view in console</div><div class="ctracker-event-activity-exclude"><input placeholder="Comma-delimited list to exclude..." /></div><div class="ctracker-event-activity-list"></div></div></td><td class="ctracker-event-activity-gauge"><span class="ctracker-label">Event Listener Monitoring</span><span class="ctracker-event-activity-gauge" id="ctracker-listener-line">Loading...</span><span class="eps-label ctracker-label">Events Per Seconds</span><div class="ctracker-event-gauge"></div></tr></table>');
+  output.append('<table><tr><td><div class="ctracker-event-aggregated"></div></td><td><div class="ctracker-event-activity"><div class="ctracker-event-activity-title">Click to view in console</div><div class="ctracker-event-activity-exclude"><input placeholder="Comma-delimited list to exclude..." /></div><div class="ctracker-event-activity-list"></div></div></td><td class="ctracker-event-activity-gauge"><span class="ctracker-label">Event Listener Monitoring</span><span class="ctracker-event-activity-gauge" id="ctracker-listener-line">Loading...</span><span class="eps-label ctracker-label">Events Per Seconds</span><div class="ctracker-event-gauge"></div></div></tr></table>');
   return opt_sb ? '' : output.toString();
 };
 
