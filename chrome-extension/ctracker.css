@@ -1,3 +1,7 @@
+.ctracker-panel-padding {
+  padding-bottom: 360px !important;
+}
+
 #closure-tracker-main-panel {
   position: fixed;
   bottom: 0px;
