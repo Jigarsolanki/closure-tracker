@@ -2,7 +2,7 @@
 
   var oListen, oUnlistenByKey, oFireListener, eventAggregator,
     dependenciesLoaded, dependencyLoaderId, recentEvents, eventChart,
-    eventListenerCount, gauge, eventCount, sparklineListenerMax;
+    eventListenerCount, gauge, eventCount, sparklineListenerMax, eventSparkline;
 
   eventAggregator = {};
   recentEvents = {};
@@ -32,8 +32,6 @@
       eventCount += 1;
 
       if (dependenciesLoaded) {
-        startEventChart();
-        startEPSgauge();
         renderSingleEvent(currentEvent);
       }
     }
@@ -147,6 +145,33 @@
     setTimeout(renderAggregatedEvents, 500);
   };
 
+  function renderEventSparklines() {
+    var refreshinterval = 1000; // update display every 500ms
+    var eventCount = [];
+    var mpoints_max = 100;
+    var mdraw = function() {
+
+      var listenerCount = goog.events.getTotalListenerCount();
+
+      eventCount.push([listenerCount]);
+      if (eventCount.length > mpoints_max){
+        eventCount.splice(0,1);
+      }
+      eventCount[0] = ["Total Listeners"];
+      if(eventCount.length > 2){
+        eventSparkline.draw(
+          google.visualization.arrayToDataTable(eventCount), {
+            height: 250,
+            width : 250
+          }
+        );
+      }
+
+      setTimeout(mdraw, refreshinterval);
+    }
+    setTimeout(mdraw, refreshinterval);
+  };
+
 
   function setUpGauge() {
 
@@ -155,6 +180,15 @@
     gaugeElement = goog.dom.getElementByClass(
       'ctracker-event-gauge');
     gauge = new google.visualization.Gauge(gaugeElement);
+  }
+
+  function setUpEventSparkline() {
+
+    var eventSparklineElement;
+
+    eventSparklineElement = goog.dom.getElement(
+      'ctracker-listener-line');
+    eventSparkline = new google.visualization.ImageSparkLine(eventSparklineElement);
   }
 
   function getGaugeDataToDraw() {
@@ -195,6 +229,13 @@
     if(!eventChart){
       setUpEventChart();
       setTimeout(renderAggregatedEvents, 500);
+    }
+  }
+
+  function startSparkLines() {
+    if(!eventSparkline){
+      setUpEventSparkline();
+      setTimeout(renderEventSparklines, 500);
     }
   }
 
@@ -256,44 +297,14 @@
   };
 
   function downloadGoogleDeps() {
-    if (window['google'] != undefined && window['google']['loader'] != undefined) {
-      if (!window['google']['visualization']) {
-      window['google']['visualization'] = {};
-      google.visualization.Version = '1.0';
-      google.visualization.JSHash = 'b8ead078cfbbc014864e12c526655941';
-      google.visualization.LoadArgs = 'file\75visualization\46v\0751\46packages\75corechart';
-      }
-      google.loader.writeLoadTag("script", google.loader.ServiceBase + "/api/visualization/1.0/b8ead078cfbbc014864e12c526655941/format+en,default,gauge.I.js", true);
-      google.loader.writeLoadTag("script", google.loader.ServiceBase + "/api/visualization/1.0/b8ead078cfbbc014864e12c526655941/format+en,default,corechart.I.js", true);
-    }
+    google.load('visualization', '1.0', {
+      callback: function(){
+        startEventChart();
+        startEPSgauge();
+        startSparkLines();
+      },
+      packages:['corechart', 'gauge', 'imagesparkline']});
   }
-
-  function setUpSparklinesForEventListeners() {
-    var refreshinterval = 500; // update display every 500ms
-    var eventCount = [];
-    var mpoints_max = 25;
-    var mdraw = function() {
-
-      var listenerCount = goog.events.getTotalListenerCount();
-
-      eventCount.push(listenerCount);
-      if (eventCount.length > mpoints_max){
-        eventCount.splice(0,1);
-      }
-      $('#ctracker-listener-line').sparkline(eventCount, {
-        width: eventCount.length * 7,
-        height: 250,
-        tooltipSuffix: ' Total Listeners',
-        lineColor: '#53a053',
-        spotRadius: 3,
-        lineWidth: 4,
-        chartRangeMax: sparklineListenerMax
-      });
-
-      setTimeout(mdraw, refreshinterval);
-    }
-    setTimeout(mdraw, refreshinterval);
-  };
 
   /**
    * START OUR APP HERE.
@@ -301,7 +312,7 @@
   dependencyLoaderId = setInterval(startApp, 1000);
   function startApp() {
     console.log('Closure Tracker -- Still Loading.');
-    if (window.ctrackerFilesLoaded === 3) {
+    if (window.ctrackerFilesLoaded === 2) {
       clearInterval(dependencyLoaderId);
       goog.require('ctracker.templates');
       console.log('Closure Tracker -- Templates Loaded.');
@@ -309,7 +320,6 @@
       console.log('Closure Tracker -- Loading Complete.');
       dependenciesLoaded = true;
       downloadGoogleDeps();
-      setUpSparklinesForEventListeners();
     }
   };
 }());

@@ -20,12 +20,6 @@ script.type = 'text/javascript';
 script.setAttribute('onload', registerFileIsLoaded);
 document.body.appendChild(script);
 
-script = document.createElement('script');
-script.src = 'https://c384939.ssl.cf1.rackcdn.com/sparkline.js';
-script.type = 'text/javascript';
-script.setAttribute('onload', registerFileIsLoaded);
-document.body.appendChild(script);
-
 mainPanelElement = document.createElement('div');
 mainPanelElement.id = 'closure-tracker-main-panel';
 
