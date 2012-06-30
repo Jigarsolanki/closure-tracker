@@ -1,0 +1,113 @@
+.ctracker-panel-padding {
+  padding-bottom: 360px !important;
+}
+
+#closure-tracker-main-panel {
+  position: fixed;
+  bottom: 0px;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  font-size: 13px;
+  width: 100%;
+}
+
+#closure-tracker-main-panel p {
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  background-color: white;
+  width: 100px;
+  margin: 0px auto;
+  cursor: pointer;
+}
+
+#closure-tracker-expanded-panel {
+  border-top: 1px solid black;
+  background-color: white;
+  width: 100%;
+  height: 320px;
+}
+
+#ctracker-event-panel {
+  width: 800px;
+  margin: 5px 0px;
+}
+
+#ctracker-options-panel {
+  text-align: left;
+  margin: 5px 15px;
+}
+
+#ctracker-options-panel span {
+  cursor: pointer;
+  margin-left: 15px;
+  color: green;
+}
+
+#ctracker-options-panel .ctracker-listener-count {
+  cursor: default;
+  color: red;
+}
+
+.ctracker-event-aggregated, .ctracker-event-activity,
+  .ctracker-event-activity-gauge {
+  text-align: left;
+  height: 280px;
+  width: 360px;
+  display: inline-block;
+  margin: 10px;
+}
+
+.ctracker-label{
+  color: green;
+}
+
+.eps-label{
+  padding-left: 60px;
+}
+
+.ctracker-event-aggregated{
+  width: 600px;
+}
+#ctracker-listener-line {
+  width: 200px;
+}
+
+.ctracker-event-gauge{
+  margin-left: 200px;
+  margin-top: 50px;
+}
+.ctracker-event-activity-gauge {
+  float: left;
+}
+
+.ctracker-event-activity{
+  overflow-y: scroll;
+}
+.ctracker-event-activity-title {
+  color: green;
+  margin-bottom: 5px;
+}
+
+.ctracker-event-activity-exclude input {
+  width: 320px;
+}
+
+.ctracker-event-activity-list div {
+  cursor: pointer;
+  color: blue;
+}
+
+.ctracker-event-activity-list div:hover {
+  background-color: lightgrey;
+}
+
+.ctracker-event-aggregated table {
+  width: 280px;
+}
+.ctracker-event-aggregated table th {
+  border-bottom: 1px solid black;
+  font-size: 14px;
+  color: gray;
+}
