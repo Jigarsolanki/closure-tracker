@@ -111,3 +111,13 @@
   font-size: 14px;
   color: gray;
 }
+
+
+
+/* new styles */
+#ctracker-event-listener-chart {
+  min-width: 400px;
+  max-width: 500px;
+  height: 290px;
+  margin: 0 auto;
+}
