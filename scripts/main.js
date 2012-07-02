@@ -7,21 +7,23 @@ var CTRACKER_BASE_URL = "http://127.0.0.1:8585/scripts/";
       eventGauge = CTRACKER_BASE_URL + "event_listener_guage.js",
       ctrackerTemplate = CTRACKER_BASE_URL + "ctracker_template.js",
       jqueryTemplate = CTRACKER_BASE_URL + "jquery.tmpl.min.js",
+      eventTypesChart = CTRACKER_BASE_URL + "ctracker_event_types_chart.js",
       tags = CTRACKER_BASE_URL + "tags.min.js";
 
   require([jquery, highCharts], function() {
-    require([jqueryTemplate, ctrackerTemplate, tags], function(){
+    require([jqueryTemplate, ctrackerTemplate, tags, eventTypesChart], function(){
       $('#closure-tracker-main-panel p').click(function() {
         $('#closure-tracker-expanded-panel').toggle();
       });
       $('#closure-tracker-expanded-panel').show();
 
       $.tmpl('mainPanel').appendTo('#closure-tracker-expanded-panel');
-      $(document).ready(function(){
-        $('#textarea').textext({ plugins : 'tags' });
-      });
+      // $(document).ready(function(){
+      //   $('#textarea').textext({ plugins : 'tags' });
+      // });
       require([eventGauge], function() {});
       require([eventChart], function() {});
+      //require([eventTypesChart], function() {});
     });
   });
 }());

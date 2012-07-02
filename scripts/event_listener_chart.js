@@ -59,7 +59,6 @@
       series: [{
         name: 'Count',
         data: (function() {
-          // generate an array of random data
           var data = [],
             time = (new Date()).getTime(),
             i;

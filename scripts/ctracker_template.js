@@ -8,8 +8,7 @@
       '<div id="ctracker-event-listener-chart-container">' +
         '<div id="ctracker-event-listener-chart"></div>'+
       '</div>' +
-      '<div id="ctracker-event-logger">' +
-        '<textarea id="textarea"  class="example" rows="1"></textarea>' +
-      '</div>');
+      '<div id="ctracker-event-type-chart"></div>'
+     );
   });
 }());

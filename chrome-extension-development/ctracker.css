@@ -115,8 +115,6 @@
   color: gray;
 }
 
-
-
 /* new styles */
 #ctracker-event-listener-chart {
   width: 400px;
@@ -124,7 +122,14 @@
   margin-left: 20px;
   float: left;
 }
-
+#ctracker-event-type-chart{
+  width: 400px;
+  height: 190px;
+  float: left;
+}
+.highcharts-legend {
+  display:none;
+}
 #ctracker-events-per-second-gauge {
   float: left;
   margin-top: -10px;
@@ -138,7 +143,6 @@
   width: 300px;
   position: relative;
 }
-
 
 #ctracker-event-logger textarea {
   width: 300px;

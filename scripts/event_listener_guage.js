@@ -2,10 +2,10 @@
   var jquery = CTRACKER_BASE_URL + "jquery.min.js",
       guage = CTRACKER_BASE_URL + "gauge.min.js",
       jqGuage = CTRACKER_BASE_URL + "jquery.gauge.js",
-      eventPerSecondTracker = CTRACKER_BASE_URL + "events_per_second_tracker.js";
+      fireEventTracker = CTRACKER_BASE_URL + "fire_event_tracker.js";
 
-  require([eventPerSecondTracker, jquery, guage, jqGuage], function(
-    eventPerSecondTracker) {
+  require([fireEventTracker, jquery, guage, jqGuage], function(
+    fireEventTracker) {
     $(document).ready(function(){
 
       var gaugeWidget, renderCount;
@@ -21,10 +21,9 @@
        });
 
       renderCount = function () {
-        gaugeWidget.gauge('setValue', eventPerSecondTracker.getCount());
-        eventPerSecondTracker.clearCount();
+        gaugeWidget.gauge('setValue', fireEventTracker.getCount());
+        fireEventTracker.clearCount();
       };
-
       setInterval(renderCount, 250);
     });
   });
