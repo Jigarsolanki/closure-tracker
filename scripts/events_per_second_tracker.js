@@ -4,11 +4,10 @@ define([], function () {
     originalFireListener;
 
   originalFireListener = goog.events.fireListener;
-    goog.events.fireListener = function() {
-      eventCount += 1;
-      return originalFireListener.apply(this, arguments);
-    };
-
+  goog.events.fireListener = function() {
+    eventCount += 1;
+    return originalFireListener.apply(this, arguments);
+  };
 
   return {
     getCount: function() {
