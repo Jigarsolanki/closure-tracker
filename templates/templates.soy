@@ -1,39 +1,9 @@
 {namespace ctracker.templates}
 
 /**
- * The event panel
+ *
  */
-{template .options_panel}
-<span class="ctracker-clear-all">Clear All</span>
-{/template}
-
-/**
- * The event panel
- */
-{template .event_panel}
-<table>
-  <tr>
-    <td>
-      <div class="ctracker-event-aggregated"></div>
-    </td>
-    <td>
-      <div class="ctracker-event-activity">
-        <div class="ctracker-event-activity-title">Click to view in console</div>
-        <div class="ctracker-event-activity-exclude"><input placeholder="Comma-delimited list to exclude..." /></div>
-        <div class="ctracker-event-activity-list"></div>
-      </div>
-    </td>
-    <td class="ctracker-event-activity-gauge">
-      <div id="ctracker-event-listener-chart" style="min-width: 200px; height: 250px; margin: 0 auto"></div>
-    </div>
- </tr>
-</table>
-{/template}
-
-/**
- * Output from a single event to display
- * @param singleEvent
- */
-{template .event_output}
-** {$singleEvent.name} ** was fired.
+{template .layout}
+  <canvas id="ctracker-events-per-second-gauge"></canvas>
+  <div id="ctracker-event-listener-chart"></div>
 {/template}

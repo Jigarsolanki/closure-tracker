@@ -1,15 +1,9 @@
 (function() {
 
-  var eventCharTheme = CTRACKER_BASE_URL + "/event_listener_style.js";
+  require([], function(theme) {
 
-  require([eventCharTheme], function(theme) {
+    var chart;
 
-    var highchartsOptions = Highcharts.setOptions(theme),
-      chart;
-
-    $('#closure-tracker-expanded-panel').append(
-      '<div id="ctracker-event-listener-chart"></div>');
-    console.log("Added an element" + $("#ctracker-event-listener-chart"));
     Highcharts.setOptions({
       global: {
         useUTC: false
