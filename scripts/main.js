@@ -6,10 +6,9 @@ var CTRACKER_BASE_URL = "http://127.0.0.1:8585/scripts/";
       eventChart = CTRACKER_BASE_URL + "event_listener_chart.js",
       eventGauge = CTRACKER_BASE_URL + "event_listener_guage.js",
       ctrackerTemplate = CTRACKER_BASE_URL + "ctracker_template.js",
-      jqueryTemplate = CTRACKER_BASE_URL + "jquery.tmpl.min.js",
-      spies = CTRACKER_BASE_URL + "spies.js";
+      jqueryTemplate = CTRACKER_BASE_URL + "jquery.tmpl.min.js";
 
-  require([jquery, highCharts, spies, jqueryTemplate, ctrackerTemplate],
+  require([jquery, highCharts, jqueryTemplate, ctrackerTemplate],
     function() {
 
     $('#closure-tracker-main-panel p').click(function() {
