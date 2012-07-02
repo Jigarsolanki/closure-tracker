@@ -5,6 +5,11 @@
   require([jquery, jqueryTemplate], function() {
     $.template('mainPanel',
       '<canvas id="ctracker-events-per-second-gauge"></canvas>'+
-      '<div id="ctracker-event-listener-chart"></div>');
+      '<div id="ctracker-event-listener-chart-container">' +
+        '<div id="ctracker-event-listener-chart"></div>'+
+      '</div>' +
+      '<div id="ctracker-event-logger">' +
+        '<textarea id="textarea"  class="example" rows="1"></textarea>' +
+      '</div>');
   });
 }());

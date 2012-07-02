@@ -25,7 +25,7 @@
 #closure-tracker-expanded-panel {
   background-color: white;
   width: 100%;
-  height: 320px;
+  height: 200px;
   border: 1px solid;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -119,9 +119,8 @@
 
 /* new styles */
 #ctracker-event-listener-chart {
-  max-width: 30%;
-  height: 290px;
-  margin: 0 auto;
+  width: 400px;
+  height: 190px;
   margin-left: 20px;
   float: left;
 }
@@ -133,3 +132,16 @@
   margin-right: -170px;
 }
 
+#ctracker-event-logger {
+  float: left;
+  border: 1px solid;
+  width: 300px;
+  position: relative;
+}
+
+
+#ctracker-event-logger textarea {
+  width: 300px;
+  top: 0px;
+  left: 0px;
+}

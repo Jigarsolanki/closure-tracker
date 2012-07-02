@@ -8,9 +8,7 @@
     eventPerSecondTracker) {
     $(document).ready(function(){
 
-
       var gaugeWidget, renderCount;
-
 
       gaugeWidget = $("#ctracker-events-per-second-gauge").gauge({
          min: 0,
