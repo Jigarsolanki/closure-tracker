@@ -142,6 +142,7 @@
   border: 1px solid;
   width: 300px;
   position: relative;
+  height: 190px;
 }
 
 #ctracker-event-logger textarea {
@@ -149,3 +150,12 @@
   top: 0px;
   left: 0px;
 }
+
+#ctracker-event-logs{
+  height: 170px;
+}
+
+#ctracker-event-logger .text-core .text-wrap .text-tags .text-tag .text-button
+  a.text-remove {
+    height: 7px;
+  }

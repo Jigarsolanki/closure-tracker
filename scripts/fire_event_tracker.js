@@ -2,7 +2,7 @@ define([], function () {
 
   var eventCount = 0,
     eventAggregator = {},
-    originalFireListener;
+    originalFireListener, fireEventCallBack;
 
   originalFireListener = goog.events.fireListener;
   goog.events.fireListener = function() {
@@ -23,6 +23,10 @@ define([], function () {
     }
     eventAggregator[eventType] += 1;
 
+    if(fireEventCallBack) {
+      fireEventCallBack(currentEvent);
+    }
+
     return originalFireListener.apply(this, arguments);
   };
 
@@ -35,6 +39,9 @@ define([], function () {
     },
     getAggregatedEventData: function () {
       return eventAggregator;
+    },
+    setFireEventCallBack: function(callback) {
+      fireEventCallBack = callback;
     }
   };
 });
