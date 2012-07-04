@@ -18,18 +18,28 @@
             load: function() {
 
               var series, update;
-              series = this.series[0];
+              series = this.series[0],
+              that = this;
 
               update = function () {
 
                 var eventTypes = [],
-                  eventCounts = [];
+                  eventCounts = [],
+                  newHeight;
 
                 $.each(fireEventTracker.getAggregatedEventData(),
                   function (k,v) {
                   eventCounts.push(v);
                   eventTypes.push(k);
                 });
+                if(eventTypes.length > 10)  {
+
+                  newHeight = eventTypes.length *  19;
+                  that.chartHeight = newHeight;
+                  $('#ctracker-event-type-chart .highcharts-container')
+                    .css('overflow-y', 'scroll');
+                  $('#ctracker-event-type-chart svg').attr('height', newHeight);
+                }
                 series.xAxis.setCategories(eventTypes);
                 series.setData(eventCounts);
               }

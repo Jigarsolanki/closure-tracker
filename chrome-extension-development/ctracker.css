@@ -153,6 +153,7 @@
 
 #ctracker-event-logs{
   height: 170px;
+  list-style-type: none;
 }
 
 #ctracker-event-logger .text-core .text-wrap .text-tags .text-tag .text-button
