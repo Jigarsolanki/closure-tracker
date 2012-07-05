@@ -46,16 +46,23 @@
 
     addNewLog = function(currentEvent) {
 
-      var newEvent;
+      var newEvent, exclusionList;
 
-      newEvent = $.tmpl('eventLog', [{
-         Name: currentEvent.name
-      }]);
-      newEvent.prependTo('#ctracker-event-logs');
-      newEvent.click(function() {
-        console.log(currentEvent.origin);
+      exclusionList = [];
+      $('#ctracker-event-logger .text-label').each(function(index, value) {
+        exclusionList.push($(value).text());
       });
-      eventLogs++;
+
+      if ($.inArray(currentEvent.name, exclusionList) === -1) {
+        newEvent = $.tmpl('eventLog', [{
+           Name: currentEvent.name
+        }]);
+        newEvent.prependTo('#ctracker-event-logs');
+        newEvent.click(function() {
+          console.log(currentEvent.origin);
+        });
+        eventLogs++;
+      }
     };
 
     fireEventHandler = function(currentEvent) {
