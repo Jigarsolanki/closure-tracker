@@ -5,6 +5,9 @@
   require([jquery, jqueryTemplate], function() {
     $.template('mainPanel',
       '<canvas id="ctracker-events-per-second-gauge"></canvas>'+
+      '<div id="ctracker-controls" >' +
+        '<button id="ctracker-clear-all">Reset</button>' +
+      '</div>' +
       '<div id="ctracker-event-listener-chart-container">' +
         '<div id="ctracker-event-listener-chart"></div>'+
       '</div>' +

@@ -14,6 +14,7 @@
       chart: {
           renderTo: 'ctracker-event-type-chart',
           type: 'bar',
+          marginRight: 40,
           events: {
             load: function() {
 

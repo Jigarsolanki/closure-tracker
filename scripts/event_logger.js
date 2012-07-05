@@ -7,7 +7,7 @@
   require([fireEventTracker, jquery, jqTemplate, tags], function(
     fireEventTracker) {
 
-    var LOGGING_LIMIT = 10,
+    var LOGGING_LIMIT = 200,
       removeOverFlowedLogs, fireEventHandler,
       eventLogs = [];
 
