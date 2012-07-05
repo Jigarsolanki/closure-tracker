@@ -97,13 +97,13 @@
   width: 320px;
 }
 
-.ctracker-event-activity-list div {
+#ctracker-event-logs li {
   cursor: pointer;
   color: blue;
 }
 
-.ctracker-event-activity-list div:hover {
-  background-color: lightgrey;
+#ctracker-event-logs li:hover {
+  background-color: #D1E2FF;
 }
 
 .ctracker-event-aggregated table {

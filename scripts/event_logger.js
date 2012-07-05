@@ -9,7 +9,7 @@
 
     var LOGGING_LIMIT = 200,
       removeOverFlowedLogs, fireEventHandler,
-      eventLogs = [];
+      eventLogs = 0;
 
     resizeLogDiv = function() {
 
@@ -38,17 +38,24 @@
     });
 
     removeOverFlowedLogs = function () {
-      if(eventLogs.length > LOGGING_LIMIT) {
+      if(eventLogs > LOGGING_LIMIT) {
         $('#ctracker-event-logger li:last-child').remove();
-        eventLogs.pop();
+        eventLogs--;
       }
     };
 
     addNewLog = function(currentEvent) {
-    $.tmpl('eventLog', [{
-       Name: currentEvent.name
-     }]).prependTo('#ctracker-event-logs');
-      eventLogs.unshift(currentEvent);
+
+      var newEvent;
+
+      newEvent = $.tmpl('eventLog', [{
+         Name: currentEvent.name
+      }]);
+      newEvent.prependTo('#ctracker-event-logs');
+      newEvent.click(function() {
+        console.log(currentEvent.origin);
+      });
+      eventLogs++;
     };
 
     fireEventHandler = function(currentEvent) {

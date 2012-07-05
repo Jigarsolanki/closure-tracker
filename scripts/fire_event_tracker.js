@@ -15,6 +15,7 @@ define([], function () {
     eventType = eventObject.type.toString();
 
     currentEvent = {
+      origin: eventObject,
       target: eventObject.target,
       name: eventType
     };
