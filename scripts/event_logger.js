@@ -11,7 +11,31 @@
       removeOverFlowedLogs, fireEventHandler,
       eventLogs = [];
 
-    $('#ctracker-event-logger textarea').textext({ plugins : 'tags' });
+    resizeLogDiv = function() {
+
+      var newHeight;
+
+      newHeight = 190 - $('.text-core').height();
+      $('#ctracker-event-logs-container').css('height', newHeight + 'px');
+    };
+
+    $('#ctracker-event-logger textarea').textext({
+      plugins : 'tags',
+      ext: {
+        tags: {
+          addTags: function(tags)
+          {
+            $.fn.textext.TextExtTags.prototype.addTags.apply(this, arguments);
+            resizeLogDiv();
+          },
+          removeTag: function(tag)
+          {
+            $.fn.textext.TextExtTags.prototype.removeTag.apply(this, arguments);
+            resizeLogDiv();
+          }
+        }
+      }
+    });
 
     removeOverFlowedLogs = function () {
       if(eventLogs.length > LOGGING_LIMIT) {

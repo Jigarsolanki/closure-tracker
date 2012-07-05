@@ -11,7 +11,9 @@
       '<div id="ctracker-event-type-chart"></div>' +
       '<div id="ctracker-event-logger">' +
         '<textarea rows="1"></textarea>' +
-        '<div><ul id="ctracker-event-logs"></ul></div>'+
+        '<div id="ctracker-event-logs-container">' +
+          '<ul id="ctracker-event-logs"></ul>' +
+        '</div>'+
       '</div>'
      );
 

@@ -156,6 +156,9 @@
   list-style-type: none;
 }
 
+#ctracker-event-logs-container {
+  overflow-y: scroll;
+}
 #ctracker-event-logger .text-core .text-wrap .text-tags .text-tag .text-button
   a.text-remove {
     height: 7px;
