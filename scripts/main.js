@@ -1,12 +1,12 @@
 var CTRACKER_BASE_URL = "http://127.0.0.1:8585/scripts/";
 
 (function() {
-  var jquery = CTRACKER_BASE_URL + "jquery.min.js",
-      highCharts = CTRACKER_BASE_URL + "highcharts.min.js",
+  var jquery = CTRACKER_BASE_URL + "deps/jquery.min.js",
+      highCharts = CTRACKER_BASE_URL + "deps/highcharts.min.js",
       eventChart = CTRACKER_BASE_URL + "event_listener_chart.js",
-      eventGauge = CTRACKER_BASE_URL + "event_listener_guage.js",
+      eventGauge = CTRACKER_BASE_URL + "event_listener_gauge.js",
       ctrackerTemplate = CTRACKER_BASE_URL + "ctracker_template.js",
-      jqueryTemplate = CTRACKER_BASE_URL + "jquery.tmpl.min.js",
+      jqueryTemplate = CTRACKER_BASE_URL + "deps/jquery.tmpl.min.js",
       eventTypesChart = CTRACKER_BASE_URL + "ctracker_event_types_chart.js",
       eventLogger = CTRACKER_BASE_URL + "event_logger.js";
 

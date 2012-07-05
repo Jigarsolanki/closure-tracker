@@ -1,7 +1,7 @@
 (function() {
-  var jquery = CTRACKER_BASE_URL + "jquery.min.js",
-      jqTemplate = CTRACKER_BASE_URL + "jquery.tmpl.min.js",
-      tags = CTRACKER_BASE_URL + "tags.min.js",
+  var jquery = CTRACKER_BASE_URL + "deps/jquery.min.js",
+      jqTemplate = CTRACKER_BASE_URL + "deps/jquery.tmpl.min.js",
+      tags = CTRACKER_BASE_URL + "deps/tags.min.js",
       fireEventTracker = CTRACKER_BASE_URL + "fire_event_tracker.js";
 
   require([fireEventTracker, jquery, jqTemplate, tags], function(

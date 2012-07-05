@@ -1,7 +1,7 @@
 (function() {
-  var jquery = CTRACKER_BASE_URL + "jquery.min.js",
+  var jquery = CTRACKER_BASE_URL + "deps/jquery.min.js",
       fireEventTracker = CTRACKER_BASE_URL + "fire_event_tracker.js",
-      highCharts = CTRACKER_BASE_URL + "highcharts.min.js";
+      highCharts = CTRACKER_BASE_URL + "deps/highcharts.min.js";
 
   require([fireEventTracker, jquery, highCharts], function(fireEventTracker) {
 

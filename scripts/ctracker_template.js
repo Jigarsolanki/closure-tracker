@@ -1,6 +1,6 @@
 (function() {
-  var jquery = CTRACKER_BASE_URL + "jquery.min.js",
-      jqueryTemplate = CTRACKER_BASE_URL + "jquery.tmpl.min.js";
+  var jquery = CTRACKER_BASE_URL + "deps/jquery.min.js",
+      jqueryTemplate = CTRACKER_BASE_URL + "deps/jquery.tmpl.min.js";
 
   require([jquery, jqueryTemplate], function() {
     $.template('mainPanel',
