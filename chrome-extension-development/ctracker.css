@@ -193,7 +193,7 @@
   text-align: center;
   text-shadow: 0 -1px 1px #64799E;
   width: 100px;
-  margin-top: 17px;
+  margin-top: 7px;
 }
 
 #ctracker-controls button:hover {
@@ -220,7 +220,6 @@
     -moz-box-shadow: inset 0 0 8px 2px #7e8da6, 0 1px 0 0 #eeeeee;
     box-shadow: inset 0 0 8px 2px #7e8da6, 0 1px 0 0 #eeeeee;
   }
-
 
 #ctracker-event-logger .text-core .text-wrap .text-tags .text-tag .text-button
   a.text-remove {
