@@ -15,7 +15,6 @@
     } else {
       localStorage.setItem(key, 'true');
     }
-    console.log(localStorage.getItem(key))
   }
 
   function shouldShow() {
