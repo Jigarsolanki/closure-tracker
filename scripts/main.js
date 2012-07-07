@@ -8,21 +8,19 @@ var CTRACKER_BASE_URL = "http://127.0.0.1:8585/scripts/";
       ctrackerTemplate = CTRACKER_BASE_URL + "ctracker_template.js",
       jqueryTemplate = CTRACKER_BASE_URL + "deps/jquery.tmpl.min.js",
       eventTypesChart = CTRACKER_BASE_URL + "ctracker_event_types_chart.js",
-      eventLogger = CTRACKER_BASE_URL + "event_logger.js";
+      eventLogger = CTRACKER_BASE_URL + "event_logger.js",
+      panelDisplayer = CTRACKER_BASE_URL + "panel_displayer.js";
 
   require([jquery, highCharts], function() {
-    require([jqueryTemplate, ctrackerTemplate, eventLogger, eventTypesChart], function(){
-      $('#closure-tracker-main-panel p').click(function() {
-        $('#closure-tracker-expanded-panel').toggle();
-      });
-      $('#closure-tracker-expanded-panel').show();
-
-      $(document).ready(function(){
-        $.tmpl('mainPanel').appendTo('#closure-tracker-expanded-panel');
-        require([eventGauge], function() {});
-        require([eventChart], function() {});
-        require([eventTypesChart], function() {});
-        require([eventLogger], function() {});
+    require([jqueryTemplate, ctrackerTemplate],
+      function(){
+      $(document).ready(function() {
+        require([panelDisplayer], function(){
+          require([eventGauge], function() {});
+          require([eventChart], function() {});
+          require([eventTypesChart], function() {});
+          require([eventLogger], function() {});
+        });
       });
     });
   });
