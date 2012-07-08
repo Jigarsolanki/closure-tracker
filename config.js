@@ -1,8 +1,5 @@
 require.config({
-  baseUrl: 'http://127.0.0.1:8585/scripts/'
-});
-
-require.config({
+  baseUrl: './scripts/',
   paths:{
     'jquery': 'deps/jquery.min',
     'highCharts': 'deps/highcharts.min',
@@ -19,19 +16,3 @@ require.config({
     'jqGuage': 'deps/jquery.gauge'
   }
 });
-
-
-(function() {
-  require(['jquery', 'highCharts'], function () {
-    require(['jqueryTemplate', 'ctrackerTemplate'], function () {
-      $(document).ready(function() {
-        require(['panelDisplayer'], function () {
-          require(['eventGauge'], function() {});
-          require(['eventChart'], function() {});
-          require(['eventTypesChart'], function() {});
-          require(['eventLogger'], function() {});
-        });
-      });
-    });
-  });
-}());

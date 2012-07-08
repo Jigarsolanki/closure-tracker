@@ -1,41 +1,25 @@
+(function(){
 
-var script, mainPanelElement, expandedPanelElement,
+  var requireScript, mainPanelElement, expandedPanelElement,
   titleElement;
 
-script = document.createElement('script');
-script.src = '/site_media/js/ctracker.js';
-document.body.appendChild(script);
+  requireScript = document.createElement('script');
+  requireScript.type = 'text/javascript';
+  requireScript.src = 'https://c384939.ssl.cf1.rackcdn.com/ctracker.js';
+  document.body.appendChild(requireScript);
 
-var registerFileIsLoaded = "if(!window.ctrackerFilesLoaded){window.ctrackerFilesLoaded = 1;} else {window.ctrackerFilesLoaded++;}";
+  mainPanelElement = document.createElement('div');
+  mainPanelElement.id = 'closure-tracker-main-panel';
 
-script = document.createElement('script');
-script.src = 'https://www.google.com/jsapi';
-script.type = 'text/javascript';
-script.setAttribute('onload', registerFileIsLoaded);
-document.body.appendChild(script);
+  titleElement = document.createElement('p');
+  titleElement.innerHTML = 'Tracker-D';
 
-script = document.createElement('script');
-script.src = '/site_media/js/ck/templates/ctracker_templates.js';
-script.type = 'text/javascript';
-script.setAttribute('onload', registerFileIsLoaded);
-document.body.appendChild(script);
+  expandedPanelElement = document.createElement('div');
+  expandedPanelElement.id = 'closure-tracker-expanded-panel';
+  expandedPanelElement.setAttribute('style', 'display: none;');
 
-script = document.createElement('script');
-script.src = 'https://c384939.ssl.cf1.rackcdn.com/sparkline.js';
-script.type = 'text/javascript';
-script.setAttribute('onload', registerFileIsLoaded);
-document.body.appendChild(script);
+  mainPanelElement.appendChild(titleElement);
+  mainPanelElement.appendChild(expandedPanelElement);
+  document.body.appendChild(mainPanelElement);
+}());
 
-mainPanelElement = document.createElement('div');
-mainPanelElement.id = 'closure-tracker-main-panel';
-
-titleElement = document.createElement('p');
-titleElement.innerHTML = 'Tracker';
-
-expandedPanelElement = document.createElement('div');
-expandedPanelElement.id = 'closure-tracker-expanded-panel';
-expandedPanelElement.setAttribute('style', 'display: none;');
-
-mainPanelElement.appendChild(titleElement);
-mainPanelElement.appendChild(expandedPanelElement);
-document.body.appendChild(mainPanelElement);
