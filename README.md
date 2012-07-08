@@ -24,7 +24,7 @@ The tracker will now be enabled for any site you visit from 127.0.0.1 or localho
 
 ## Description of Project
 
--- Insert screenshot of event tracker here to explain --
+![Closure Tracker](http://i.imgur.com/OQy6b.png)
 
 ### Events Per Second Gauge
 
