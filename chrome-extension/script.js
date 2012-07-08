@@ -12,7 +12,7 @@
   mainPanelElement.id = 'closure-tracker-main-panel';
 
   titleElement = document.createElement('p');
-  titleElement.innerHTML = 'Tracker-D';
+  titleElement.innerHTML = 'Tracker';
 
   expandedPanelElement = document.createElement('div');
   expandedPanelElement.id = 'closure-tracker-expanded-panel';
