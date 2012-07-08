@@ -41,6 +41,9 @@ define(function (require) {
     getAggregatedEventData: function () {
       return eventAggregator;
     },
+    clearAggregatedEventData: function() {
+      eventAggregator = {};
+    },
     setFireEventCallBack: function(callback) {
       fireEventCallBack = callback;
     }

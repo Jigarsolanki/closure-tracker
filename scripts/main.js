@@ -16,7 +16,8 @@ require.config({
     'tags': 'deps/tags.min',
     'fireEventTracker': 'fire_event_tracker',
     'guage': 'deps/gauge.min',
-    'jqGuage': 'deps/jquery.gauge'
+    'jqGuage': 'deps/jquery.gauge',
+    'reset': 'reset'
   }
 });
 
@@ -30,6 +31,7 @@ require.config({
           require(['eventChart'], function() {});
           require(['eventTypesChart'], function() {});
           require(['eventLogger'], function() {});
+          require(['reset'], function() {});
         });
       });
     });

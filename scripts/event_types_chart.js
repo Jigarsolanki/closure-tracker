@@ -1,11 +1,13 @@
-(function() {
-  require(['fireEventTracker', 'jquery', 'highCharts'], function(fireEventTracker) {
+define(['fireEventTracker', 'jquery', 'highCharts'], function(
+  fireEventTracker) {
 
-    var chart, chartDataFormartter;
+    var chart, chartDataFormartter, setDefaultChart;
 
-    getChartData = function() {
-      console.log(fireEventTracker.getAggregatedEventData());
-    };
+    setDefaultChart = function () {
+      chart.series[0].xAxis.setCategories(['']);
+      chart.series[0].setData([0]);
+    }
+
     chart = new Highcharts.Chart({
       chart: {
           renderTo: 'ctracker-event-type-chart',
@@ -37,8 +39,12 @@
                     .css('overflow-y', 'scroll');
                   $('#ctracker-event-type-chart svg').attr('height', newHeight);
                 }
-                series.xAxis.setCategories(eventTypes);
-                series.setData(eventCounts);
+                if(eventTypes.length == 0){
+                  setDefaultChart();
+                } else{
+                  series.xAxis.setCategories(eventTypes);
+                  series.setData(eventCounts);
+                }
               }
               setInterval(update, 1000);
             }
@@ -91,5 +97,10 @@
         data: [0]
       }]
     });
-  });
-}());
+
+  return {
+    clear: function() {
+      setDefaultChart();
+    }
+  }
+});
