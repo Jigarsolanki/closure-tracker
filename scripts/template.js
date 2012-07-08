@@ -1,8 +1,6 @@
 (function() {
-  var jquery = CTRACKER_BASE_URL + "deps/jquery.min.js",
-      jqueryTemplate = CTRACKER_BASE_URL + "deps/jquery.tmpl.min.js";
 
-  require([jquery, jqueryTemplate], function() {
+  require(['jquery', 'jqueryTemplate'], function() {
     $.template('mainPanel',
       '<canvas id="ctracker-events-per-second-gauge"></canvas>'+
       '<div id="ctracker-controls" >' +

@@ -1,10 +1,5 @@
 (function() {
-  var jquery = CTRACKER_BASE_URL + "deps/jquery.min.js",
-      guage = CTRACKER_BASE_URL + "deps/gauge.min.js",
-      jqGuage = CTRACKER_BASE_URL + "deps/jquery.gauge.js",
-      fireEventTracker = CTRACKER_BASE_URL + "fire_event_tracker.js";
-
-  require([fireEventTracker, jquery, guage, jqGuage], function(
+  require(['fireEventTracker', 'guage', 'jqGuage'], function(
     fireEventTracker) {
     $(document).ready(function(){
 

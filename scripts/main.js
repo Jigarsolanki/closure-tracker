@@ -1,25 +1,31 @@
-var CTRACKER_BASE_URL = "http://127.0.0.1:8585/scripts/";
+require.config({
+  baseUrl: 'http://127.0.0.1:8585/scripts/',
+  paths: {
+    'jquery': 'deps/jquery.min',
+    'highCharts': 'deps/highcharts.min',
+    'eventChart':'event_listener_chart',
+    'eventGauge': 'event_listener_gauge',
+    'ctrackerTemplate': 'template',
+    'jqueryTemplate': 'deps/jquery.tmpl.min',
+    'eventTypesChart': 'event_types_chart',
+    'eventLogger': 'event_logger',
+    'panelDisplayer': 'panel_displayer',
+    'tags': 'deps/tags.min',
+    'fireEventTracker': 'fire_event_tracker',
+    'guage': 'deps/gauge.min',
+    'jqGuage': 'deps/jquery.gauge'
+  }
+});
 
 (function() {
-  var jquery = CTRACKER_BASE_URL + "deps/jquery.min.js",
-      highCharts = CTRACKER_BASE_URL + "deps/highcharts.min.js",
-      eventChart = CTRACKER_BASE_URL + "event_listener_chart.js",
-      eventGauge = CTRACKER_BASE_URL + "event_listener_gauge.js",
-      ctrackerTemplate = CTRACKER_BASE_URL + "ctracker_template.js",
-      jqueryTemplate = CTRACKER_BASE_URL + "deps/jquery.tmpl.min.js",
-      eventTypesChart = CTRACKER_BASE_URL + "ctracker_event_types_chart.js",
-      eventLogger = CTRACKER_BASE_URL + "event_logger.js",
-      panelDisplayer = CTRACKER_BASE_URL + "panel_displayer.js";
-
-  require([jquery, highCharts], function() {
-    require([jqueryTemplate, ctrackerTemplate],
-      function(){
+  require(['jquery', 'highCharts'], function () {
+    require(['jqueryTemplate', 'ctrackerTemplate'], function () {
       $(document).ready(function() {
-        require([panelDisplayer], function(){
-          require([eventGauge], function() {});
-          require([eventChart], function() {});
-          require([eventTypesChart], function() {});
-          require([eventLogger], function() {});
+        require(['panelDisplayer'], function () {
+          require(['eventGauge'], function() {});
+          require(['eventChart'], function() {});
+          require(['eventTypesChart'], function() {});
+          require(['eventLogger'], function() {});
         });
       });
     });
