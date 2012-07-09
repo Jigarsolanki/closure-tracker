@@ -17,7 +17,8 @@ require.config({
     'fireEventTracker': 'fire_event_tracker',
     'guage': 'deps/gauge.min',
     'jqGuage': 'deps/jquery.gauge',
-    'reset': 'reset'
+    'reset': 'reset',
+    'hotkeys': 'deps/jquery.hotkeys-0.7.9.min'
   }
 });
 
