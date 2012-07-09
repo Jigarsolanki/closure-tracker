@@ -30,6 +30,11 @@ define(['jquery', 'hotkeys'], function() {
     toggleLocalStoreValue();
   });
 
+  $('#closure-tracker-main-panel p').click(function(){
+    $('#closure-tracker-expanded-panel').toggle();
+    toggleLocalStoreValue();
+  });
+
   if(shouldShow()) {
      $('#closure-tracker-expanded-panel').show();
   } else {

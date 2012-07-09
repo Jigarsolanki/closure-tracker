@@ -1,4 +1,4 @@
-define(function (require) {
+define([], function () {
 
   var eventCount = 0,
     eventAggregator = {},
