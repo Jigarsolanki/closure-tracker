@@ -6,10 +6,24 @@ events that are being fired. It is meant for use with the Google Closure Javascr
 
 ## Installation Notes
 
+### One click install
+
+[Closure Tracker on App Store](https://chrome.google.com/webstore/detail/ppgnbnmkomjciappjoapnhhoibckgpop)
+
+### Development
+
 First clone the repository
 
 ```
 git clone git://github.com/Jigarsolanki/closure-tracker.git
+```
+
+You will have to have npm installed as well as node. You have to run the node application to serve the JS files for
+development. Go to the folder you cloned Closure Tracker to and type
+
+```
+npm install
+node app.js
 ```
 
 After that install the plugin for chrome by going to
@@ -17,8 +31,7 @@ After that install the plugin for chrome by going to
 * Settings > Extensions 
 * Enable 'Developer Mode'
 * Load unpacked extension
-* Browse to where you cloned the repository and select the chrome-extension folder
-(NOT the chrome-extension-development folder)
+* Browse to where you cloned the repository and select the chrome-extension-development folder
 
 The tracker will now be enabled for any site you visit from 127.0.0.1 or localhost
 
