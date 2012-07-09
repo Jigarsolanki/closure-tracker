@@ -1,4 +1,4 @@
-(function() {
+define(['jquery', 'hotkeys'], function() {
 
   var key = 'ctrackerDisplayFlag';
 
@@ -25,7 +25,7 @@
     return (flag && flag === 'true')
   }
 
-  $('#closure-tracker-main-panel p').click(function() {
+  $(document).bind('keydown', 'alt+shift+t', function(){
     $('#closure-tracker-expanded-panel').toggle();
     toggleLocalStoreValue();
   });
@@ -35,4 +35,5 @@
   } else {
    $('#closure-tracker-expanded-panel').hide();
   }
-}());
+
+});
