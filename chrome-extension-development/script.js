@@ -4,6 +4,8 @@
   titleElement;
 
    var CTRACKER_BASE_URL = "http://127.0.0.1:8585";
+
+
   requireScript = document.createElement('script');
   requireScript.type = 'text/javascript';
   requireScript.setAttribute('data-main', CTRACKER_BASE_URL + '/scripts/main.js');
