@@ -1,6 +1,9 @@
 {
-    "name": "closure event override",
-    "version": "0.0.0.1",
+    "name": "Tracker for Google Closure",
+    "version": "0.0.0.2",
+    "icons": {
+      "128": "ctracker.png"
+    },
     "content_scripts": [
         {
         "matches": ["http://127.0.0.1/*", "https://127.0.0.1/*", "http://localhost/*"],

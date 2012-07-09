@@ -24,16 +24,14 @@ require.config({
 
 
 (function() {
-  require(['jquery', 'highCharts'], function () {
-    require(['jqueryTemplate', 'ctrackerTemplate'], function () {
-      $(document).ready(function() {
-        require(['panelDisplayer'], function () {
-          require(['eventGauge'], function() {});
-          require(['eventChart'], function() {});
-          require(['eventTypesChart'], function() {});
-          require(['eventLogger'], function() {});
-          require(['reset'], function() {});
-        });
+  require(['jquery', 'ctrackerTemplate'], function () {
+    $(document).ready(function() {
+      require(['panelDisplayer'], function () {
+        require(['eventGauge'], function() {});
+        require(['eventChart'], function() {});
+        require(['eventTypesChart'], function() {});
+        require(['eventLogger'], function() {});
+        require(['reset'], function() {});
       });
     });
   });

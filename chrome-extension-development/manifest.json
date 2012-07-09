@@ -1,5 +1,5 @@
 {
-    "name": "closure event override",
+    "name": "Tracker for Google Closure",
     "version": "0.0.0.1",
     "content_scripts": [
         {

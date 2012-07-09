@@ -16,5 +16,6 @@ require.config({
     'jqGuage': 'deps/jquery.gauge',
     'reset': 'reset',
     'hotkeys': 'deps/jquery.hotkeys-0.7.9.min'
-  }
+  },
+  findNestedDependencies: true
 });
