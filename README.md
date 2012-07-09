@@ -35,7 +35,14 @@ After that install the plugin for chrome by going to
 
 The tracker will now be enabled for any site you visit from 127.0.0.1 or localhost
 
-## Description of Project
+## Usage
+
+* To open or close the tracker press 't' or click on the Tracker button.
+* Press the reset button to clear the logger and total event graph
+* Add items to the input box above the logger to exclude events you don't care about
+
+
+## Description
 
 ![Closure Tracker](http://i.imgur.com/OQy6b.png)
 
