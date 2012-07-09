@@ -25,7 +25,7 @@ define(['jquery', 'hotkeys'], function() {
     return (flag && flag === 'true')
   }
 
-  $(document).bind('keydown', 'alt+shift+t', function(){
+  $(document).bind('keydown', 't', function(){
     $('#closure-tracker-expanded-panel').toggle();
     toggleLocalStoreValue();
   });
