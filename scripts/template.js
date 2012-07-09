@@ -5,6 +5,10 @@
       '<canvas id="ctracker-events-per-second-gauge"></canvas>'+
       '<div id="ctracker-controls" >' +
         '<button id="ctracker-clear-all">Reset</button>' +
+        '<div>' +
+          '<input type="checkbox" id="ctracker-enable-browser-event-option">' +
+          '<label for="ctracker-enable-browser-event-option">Enable browser events</label>' +
+        '</div>' +
       '</div>' +
       '<div id="ctracker-event-listener-chart-container">' +
         '<div id="ctracker-event-listener-chart"></div>'+
