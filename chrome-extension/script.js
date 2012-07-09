@@ -5,7 +5,7 @@
 
   requireScript = document.createElement('script');
   requireScript.type = 'text/javascript';
-  requireScript.src = 'https://c384939.ssl.cf1.rackcdn.com/ctracker_dist.js';
+  requireScript.src = 'http://127.0.0.1:8585/dist/ctracker_dist.js';
   document.body.appendChild(requireScript);
 
   mainPanelElement = document.createElement('div');
