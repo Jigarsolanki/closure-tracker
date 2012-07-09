@@ -9,27 +9,45 @@ define(function (require) {
 
     var listener, eventObject, eventType, currentEvent;
 
-    eventCount += 1;
     listener = arguments[0];
     eventObject = arguments[1];
-    eventType = eventObject.type.toString();
 
-    currentEvent = {
-      origin: eventObject,
-      target: eventObject.target,
-      name: eventType
-    };
-    if (!eventAggregator[eventType]) {
-      eventAggregator[eventType] = 0;
-    }
-    eventAggregator[eventType] += 1;
+    if (canTrackEvent(eventObject)) {
+      eventCount += 1;
+      eventType = eventObject.type.toString();
 
-    if(fireEventCallBack) {
-      fireEventCallBack(currentEvent);
+      currentEvent = {
+        origin: eventObject,
+        target: eventObject.target,
+        name: eventType
+      };
+      if (!eventAggregator[eventType]) {
+        eventAggregator[eventType] = 0;
+      }
+      eventAggregator[eventType] += 1;
+
+      if (fireEventCallBack) {
+        fireEventCallBack(currentEvent);
+      }
     }
 
     return originalFireListener.apply(this, arguments);
   };
+
+  function isBrowserEvent(currentEvent) {
+    return currentEvent.getBrowserEvent ? true : false;
+  }
+
+  function areBrowserEventsEnabled(currentEvent) {
+    return $('#ctracker-enable-browser-event-option:checked').length === 1;
+  }
+
+  function canTrackEvent(currentEvent) {
+    if (isBrowserEvent(currentEvent)) {
+      return areBrowserEventsEnabled();
+    }
+    return true;
+  }
 
   return {
     getCount: function () {
