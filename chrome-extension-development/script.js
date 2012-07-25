@@ -14,7 +14,7 @@
 
   requireScript = document.createElement('script');
   requireScript.type = 'text/javascript';
-  requireScript.src = CTRACKER_BASE_URL + '/dist/ctracker.js';
+  requireScript.src = CTRACKER_BASE_URL + '/dist/ctracker_dist.js';
   document.body.appendChild(requireScript);
 
   mainPanelElement = document.createElement('div');
