@@ -63,7 +63,7 @@ define(['fireEventTracker', 'jquery', 'tags'], function(fireEventTracker) {
     }
   });
 
-  clear= function () {
+  clear = function () {
     $('#ctracker-event-logs').empty();
     eventLogs = 0;
   };

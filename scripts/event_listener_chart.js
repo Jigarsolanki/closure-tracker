@@ -34,7 +34,7 @@ define(['highCharts'], function(theme) {
     },
     yAxis: {
       title: {
-        text: 'Listern Count'
+        text: 'Listener Count'
       },
       plotLines: [{
         value: 0,

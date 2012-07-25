@@ -12,7 +12,7 @@ define([], function () {
     listener = arguments[0];
     eventObject = arguments[1];
 
-    if (canTrackEvent(eventObject)) {
+    if (canTrackEvent(eventObject) && $('#closure-tracker-expanded-panel:hidden').length != 1) {
       eventCount += 1;
       eventType = eventObject.type.toString();
 
