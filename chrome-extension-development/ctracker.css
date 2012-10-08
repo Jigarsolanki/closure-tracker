@@ -10,6 +10,7 @@
   font-weight: bold;
   font-size: 13px;
   width: 100%;
+  z-index: 9999;
 }
 
 #closure-tracker-main-panel p {
@@ -151,3 +152,27 @@
   a.text-remove {
     height: 7px;
   }
+
+#ctracker-event-stacktrace {
+  width: 600px;
+  height: 190px;
+  float: left;
+}
+
+#ctracker-event-stacktrace h2 {
+  font-weight: bold;
+  font-size: 16px;
+  color: blue;
+  margin: 5px;
+}
+
+#ctracker-event-stacktrace ul {
+  overflow-y: scroll;
+  height: 160px;
+  padding-left: 10px;
+  text-align: left;
+}
+
+#ctracker-event-stacktrace li {
+  margin: 5px 0px;
+}

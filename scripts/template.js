@@ -18,10 +18,21 @@
         '<textarea rows="1"></textarea>' +
         '<div id="ctracker-event-logs-container">' +
           '<ul id="ctracker-event-logs"></ul>' +
-        '</div>'+
-      '</div>'
+        '</div>' +
+      '</div>' +
+      '<div id="ctracker-event-stacktrace"></div>'
      );
 
-    $.template( "eventLog", '<li><b>${Name}</b></li>' );
+    $.template( 'eventLog', '<li><b>${Name}</b></li>' );
+
+    $.template(
+      'stacktrace',
+      '<h2>${eventOrigin} Stack Trace</h2>' +
+      '<ul>' +
+      '{{each trace}}' +
+        '<li>${$value}</li>' +
+      '{{/each}}' +
+      '</ul>'
+    );
   });
 }());

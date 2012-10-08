@@ -1,6 +1,7 @@
 {
     "name": "Tracker for Google Closure",
     "version": "0.0.0.1",
+    "manifest_version": 2,
     "content_scripts": [
         {
         "matches": [
@@ -11,5 +12,10 @@
         "js": ["script.js"],
         "css": ["ctracker.css"]
         }
+    ],
+    "web_accessible_resources": [
+      "scripts/main.js",
+      "scripts/require.js",
+      "dist/ctracker_dist.js"
     ]
 }

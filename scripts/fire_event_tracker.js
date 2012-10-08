@@ -1,4 +1,4 @@
-define([], function () {
+define(['stacktrace'], function () {
 
   var eventCount = 0,
     eventAggregator = {},
@@ -7,7 +7,9 @@ define([], function () {
   originalFireListener = goog.events.fireListener;
   goog.events.fireListener = function() {
 
-    var listener, eventObject, eventType, currentEvent;
+    var listener, eventObject, eventType, currentEvent, RELEVANT_STACK_SLICE;
+
+    RELEVANT_STACK_SLICE = 6;
 
     listener = arguments[0];
     eventObject = arguments[1];
@@ -19,7 +21,8 @@ define([], function () {
       currentEvent = {
         origin: eventObject,
         target: eventObject.target,
-        name: eventType
+        name: eventType,
+        stacktrace: printStackTrace().slice(RELEVANT_STACK_SLICE)
       };
       if (!eventAggregator[eventType]) {
         eventAggregator[eventType] = 0;

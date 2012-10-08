@@ -34,7 +34,11 @@ define(['fireEventTracker', 'jquery', 'tags'], function(fireEventTracker) {
       }]);
       newEvent.prependTo('#ctracker-event-logs');
       newEvent.click(function() {
-        console.log(currentEvent.origin);
+        var stackHtml = $.tmpl('stacktrace', [{
+          eventOrigin: currentEvent.origin.type,
+          trace: currentEvent.stacktrace
+        }]);
+        $('#ctracker-event-stacktrace').html(stackHtml);
       });
       eventLogs++;
     }

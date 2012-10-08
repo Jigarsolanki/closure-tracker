@@ -2,6 +2,7 @@ require.config({
   baseUrl: './scripts/',
   paths:{
     'jquery': 'deps/jquery.min',
+    'stacktrace': 'deps/stacktrace.0.4.min',
     'highCharts': 'deps/highcharts.min',
     'eventChart':'event_listener_chart',
     'eventGauge': 'event_listener_gauge',
